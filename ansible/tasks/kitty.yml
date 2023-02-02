@@ -1,0 +1,6 @@
+---
+
+  # shell command copied from 'https://sw.kovidgoyal.net/kitty/binary/'
+  - name: install kitty using binary installer
+    shell: "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
+    warn: false  # Don't want to use uri builtin because we immediately pipe

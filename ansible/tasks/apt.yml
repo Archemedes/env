@@ -1,0 +1,11 @@
+---
+- name: "install apt packages"
+  become: true
+  ansible.builtin.apt:
+    install_recommends: true
+    name: "{{ item }}"
+  loop:
+    - fish
+    - zoxide
+    - exa
+    - stow

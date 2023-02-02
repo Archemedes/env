@@ -1,0 +1,8 @@
+---
+- hosts: all
+  vars:
+    username: ubuntu
+
+  tasks:
+    - import_tasks: tasks/apt.yml
+    - import_tasks: tasks/neovim.yml
