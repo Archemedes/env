@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
     ansible.playbook = "ansible/playbook.yml"
-    ansible.extra_vars = { username: "vagrant" }
+    # ansible.extra_vars = { username: "vagrant" }
     ansible.ask_become_pass = true
   end
 
