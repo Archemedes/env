@@ -3,6 +3,7 @@
   vars:
     username: ubuntu
     env_git_branch: master
+    force_update: false
 
   tasks:
     - import_tasks: tasks/apt.yml

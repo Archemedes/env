@@ -2,6 +2,7 @@
 - name: Check if Kitty is installed
   ansible.builtin.stat:
     path: "{{ ansible_env.HOME }}/.local/kitty.app/bin/kitty"
+  when: not force_update
   register: kitty_present
 
 - name: install kitty using binary installer
@@ -15,4 +16,4 @@
     - name: run the installer
       shell: "/tmp/kitty-installer.sh"
 
-  when: ( kitty_present is not defined ) or ( not kitty_present.stat.exists | bool )
+  when: ( kitty_present.stat is not defined ) or ( not kitty_present.stat.exists | bool )

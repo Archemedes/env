@@ -2,6 +2,7 @@
 - name: Check if neovim is installed
   ansible.builtin.stat:
     path: /usr/bin/nvim
+  when: not force_update
   register: neovim_present
 
 - name: Download and Install neovim
@@ -16,5 +17,5 @@
       become: true
       ansible.builtin.apt: 
         deb: "/tmp/nvim-linux64.deb"
-        state: present
-  when: ( neovim_present is not defined ) or ( not neovim_present.stat.exists | bool )
+        state: latest
+  when: ( neovim_present.stat is not defined ) or ( not neovim_present.stat.exists | bool )
