@@ -11,3 +11,20 @@
   ansible.builtin.apt_repository:
     repo: ppa:mozillateam/ppa
     state: present
+
+- name: prefer mozilla PPA for apt install
+  become: yes
+  ansible.builtin.blockinfile:
+    path: /etc/apt/preferences.d/mozilla-firefox
+    block: |
+      Package: *
+      Pin: release o=LP-PPA-mozillateam
+      Pin-Priority: 1001
+    create: true
+
+- name: install firefox
+  become: yes
+  ansible.builtin.apt:
+    state: latest
+    name: firefox
+
