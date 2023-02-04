@@ -1,7 +1,7 @@
 ---
 - name: Check if Kitty is installed
   ansible.builtin.stat:
-    path: "{{ ansible_env.HOME }}/.local/bin/kitty"
+    path: "{{ ansible_env.HOME }}/.local/kitty.app/bin/kitty"
   register: kitty_present
 
 - name: install kitty using binary installer
