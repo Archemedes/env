@@ -1,0 +1,11 @@
+---
+- name: Remove firefox snap package
+  become: yes
+  community.general.snap:
+    name: firefox
+    state: absent
+
+- name: Add mozilla PPA
+  ansible.builtin.apt_repository:
+    repo: ppa:mozillateam/ppa
+    state: present
