@@ -20,6 +20,9 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "ansible/playbook.yml"
     # ansible.extra_vars = { username: "vagrant" }
     ansible.ask_become_pass = true
+    # Comp mode is needed for ansible 2.13 and vagrant 2.2.6. 
+    # see https://github.com/geerlingguy/ansible-vagrant-examples/issues/83
+    ansible.compatibility_mode = "2.0"
   end
 
 end

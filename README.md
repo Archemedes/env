@@ -3,9 +3,10 @@
 ## Running the ansible playbook
 
 Requires ansible be installed as well as the `community.general` collection.
-The following should work:
+We prefer using ansible >=2.13.17 through pip. The following should work:
 
 ```bash
-sudo apt install ansible
-ansible-galaxy collection install community.general
+sudo apt remove ansible -y # Old version may already exist
+pip install ansible
+sudo apt install ansible -y
 ```
