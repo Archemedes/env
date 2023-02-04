@@ -10,3 +10,5 @@
     - exa
     - stow
     - fzf
+    - jq
+    - fd-find
