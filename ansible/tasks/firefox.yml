@@ -4,8 +4,10 @@
   community.general.snap:
     name: firefox
     state: absent
+  ignore_errors: true
 
 - name: Add mozilla PPA
+  become: yes
   ansible.builtin.apt_repository:
     repo: ppa:mozillateam/ppa
     state: present
