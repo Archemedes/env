@@ -1,12 +1,20 @@
 ---
-- name: Download neovim
-  ansible.builtin.get_url:
-    url: "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb"
-    dest: "/tmp/nvim-linux64.deb"
-    mode: 0644
+- name: Check if neovim is installed
+  ansible.builtin.stat:
+    path: /usr/bin/nvim
+  register: neovim_present
 
-- name: install neovim
-  become: true
-  ansible.builtin.apt: 
-    deb: "/tmp/nvim-linux64.deb"
-    state: present
+- name: Download and Install neovim
+  block:
+    - name: download neovim
+      ansible.builtin.get_url:
+        url: "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb"
+        dest: "/tmp/nvim-linux64.deb"
+        mode: 0644
+
+    - name: install neovim
+      become: true
+      ansible.builtin.apt: 
+        deb: "/tmp/nvim-linux64.deb"
+        state: present
+  when: ( neovim_present is not defined ) or ( not neovim_present.stat.exists | bool )
