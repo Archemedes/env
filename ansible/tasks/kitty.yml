@@ -31,4 +31,13 @@
         - lib
         - share
 
+    - name: set kitty as default terminal
+      become: yes
+      community.general.alternatives:
+        name: x-terminal-emulator
+        link: /usr/bin/x-terminal-emulator
+        path: "{{ ansible_env.HOME }}/.local/bin/kitty"
+        priority: 100
+        state: auto
+
   when: ( kitty_present.stat is not defined ) or ( not kitty_present.stat.exists | bool )
