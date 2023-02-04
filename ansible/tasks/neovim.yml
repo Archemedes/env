@@ -17,5 +17,5 @@
       become: true
       ansible.builtin.apt: 
         deb: "/tmp/nvim-linux64.deb"
-        state: latest
+        state: present
   when: ( neovim_present.stat is not defined ) or ( not neovim_present.stat.exists | bool )
