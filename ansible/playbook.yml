@@ -7,3 +7,4 @@
     - import_tasks: tasks/apt.yml
     - import_tasks: tasks/shell.yml
     - import_tasks: tasks/neovim.yml
+    - import_tasks: tasks/kitty.yml

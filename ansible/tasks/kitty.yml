@@ -1,6 +1,18 @@
 ---
+- name: Check if Kitty is installed
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.local/bin/kitty"
+  register: kitty_present
 
-  # shell command copied from 'https://sw.kovidgoyal.net/kitty/binary/'
-  - name: install kitty using binary installer
-    shell: "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
-    warn: false  # Don't want to use uri builtin because we immediately pipe
+- name: install kitty using binary installer
+  block:
+    - name: fetch binary installer from remote
+      ansible.builtin.get_url:
+        url: "https://sw.kovidgoyal.net/kitty/installer.sh"
+        dest: "/tmp/kitty-installer.sh"
+        mode: 0744
+
+    - name: run the installer
+      shell: "/tmp/kitty-installer.sh"
+
+  when: ( kitty_present is not defined ) or ( not kitty_present.stat.exists | bool )
