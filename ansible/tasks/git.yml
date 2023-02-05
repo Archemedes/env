@@ -1,6 +1,6 @@
 ---
   - name: ensure git repo is up to date
     ansible.builtin.git:
-      repo: https://github.com/Archemedes/env.git
+      repo: "{{ env_repo }}"
       dest: "{{ ansible_env.HOME }}/env"
       refspec: "{{ env_git_branch }}"

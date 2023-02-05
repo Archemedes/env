@@ -1,4 +1,7 @@
+## About this repository
 
+This repo should exist on the ansible host and will be cloned to the guest machine.
+It will live in `~/env`. A lot of commands implicitly assume this is where the repository exists
 
 ## Running the ansible playbook
 

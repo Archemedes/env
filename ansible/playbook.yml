@@ -2,6 +2,7 @@
 - hosts: all
   vars:
     username: ubuntu
+    env_repo: https://github.com/Archemedes/env.git
     env_git_branch: master
     force_update: false
 
