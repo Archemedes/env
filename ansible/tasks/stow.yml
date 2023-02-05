@@ -1,0 +1,3 @@
+---
+- name: run stow shell script
+  shell: "{{ ansible_env.HOME }}/env/stow.sh"

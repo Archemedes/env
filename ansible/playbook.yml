@@ -12,3 +12,4 @@
     - import_tasks: tasks/kitty.yml
     - import_tasks: tasks/git.yml
     - import_tasks: tasks/firefox.yml
+    - import_tasks: tasks/stow.yml
