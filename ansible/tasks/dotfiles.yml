@@ -1,5 +1,15 @@
 ---
+- name: Get Vundle into the .vim rtp
+  ansible.builtin.git:
+      repo: https://github.com/VundleVim/Vundle.vim.git
+      dest: "{{ ansible_env.HOME }}/.vim/bundle/Vundle.vim"
+      single_branch: true
+      depth: 1
+
 - name: Create .vimrc that forwards to .config/vim
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/.vimrc"
+    dest: "{{ ansible_env.HOME }}/.vim/vimrc"
     content: "source {{ ansible_env.HOME }}/.config/vim/init.vim"
+
+- name: Run initial plugin installation
+  shell: "vim +PluginInstall +qa!"
