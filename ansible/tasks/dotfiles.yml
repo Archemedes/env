@@ -1,0 +1,5 @@
+---
+- name: Create .vimrc that forwards to .config/vim
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.vimrc"
+    content: "source {{ ansible_env.HOME }}/.config/vim/init.vim"
