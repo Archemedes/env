@@ -4,7 +4,7 @@
   community.general.snap:
     name: firefox
     state: absent
-  when: ansible_version.full is version('2.13.0', '>=')
+  when: ansible_version.full is version('2.10.0', '>=')
 
 - name: Add mozilla PPA
   become: yes
