@@ -13,3 +13,14 @@ sudo apt remove ansible -y # Old version may already exist
 pip install ansible
 sudo apt install ansible -y
 ```
+
+Prototyping/testing of the ansible playbook can be done with vagrant.
+Vagrantfile is provided in this repo. From the base dir, one can run the following:
+
+```bash
+sudo apt install vagrant
+vagrant up
+vagrant provision # might be needed to run this if ssh authenthication fails
+```
+
+using `vagrant ssh` should give a virtual machine environment correctly set up
