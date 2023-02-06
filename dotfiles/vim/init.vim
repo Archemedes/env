@@ -61,7 +61,7 @@ function! Render_Only_File(...)
   call builder.add_section('airline_b', '!! %F')
   return 1   " modify the statusline with the current contents of the builder
 endfunction
-call airline#add_inactive_statusline_func('Render_Only_File')
+silent! call airline#add_inactive_statusline_func('Render_Only_File')
 
 
 let g:airline_mode_map = {
@@ -81,7 +81,7 @@ let g:bufferline_echo = 0
 let g:bufferline_modified = ' ✏️ '
 
 set background=dark
-colorscheme one
+silent! colorscheme one
 
 let g:markbar_peekaboo_marks_to_display = '''.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:markbar_peekaboo_width= 50
