@@ -1,18 +1,27 @@
 ---
-  - name: check out the pyenv repo
-    ansible.builtin.git:
-      repo: https://github.com/pyenv/pyenv.git
-      dest: "{{ ansible_env.HOME }}/.pyenv"
+- name: "install python-related apt packages"
+  become: true
+  ansible.builtin.apt:
+    install_recommends: true
+    name: "{{ item }}"
+  loop:
+    - python-is-python3
+    - python3-pip
 
-  - name: check out the virtualenv plugin for pyenv
-    ansible.builtin.git:
-      repo: https://github.com/pyenv/pyenv-virtualenv.git
-      dest: "{{ ansible_env.HOME }}/.pyenv/plugins/pyenv-virtualenv"
+- name: check out the pyenv repo
+  ansible.builtin.git:
+    repo: https://github.com/pyenv/pyenv.git
+    dest: "{{ ansible_env.HOME }}/.pyenv"
 
-  - name: install pipx
-    ansible.builtin.pip:
-      name: pipx
-      extra_args: --user
+- name: check out the virtualenv plugin for pyenv
+  ansible.builtin.git:
+    repo: https://github.com/pyenv/pyenv-virtualenv.git
+    dest: "{{ ansible_env.HOME }}/.pyenv/plugins/pyenv-virtualenv"
 
-  - name: ensure pipx path (even in venvs)
-    shell: "python3 -m pipx ensurepath"
+- name: install pipx
+  ansible.builtin.pip:
+    name: pipx
+    extra_args: --user
+
+- name: ensure pipx path (even in venvs)
+  shell: "python3 -m pipx ensurepath"
