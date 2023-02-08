@@ -1,4 +1,9 @@
 ---
+- name: make sure original config.fish file is gone
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/fish/config.fish"
+    state: absent
+
 - name: run stow shell script
   shell: 
     cmd: "./stow.sh"
