@@ -8,3 +8,11 @@
     ansible.builtin.git:
       repo: https://github.com/pyenv/pyenv-virtualenv.git
       dest: "{{ ansible_env.HOME }}/.pyenv/plugins/pyenv-virtualenv"
+
+  - name: install pipx
+    ansible.builtin.pip:
+      name: pipx
+      extra_args: --user
+
+  - name: ensure pipx path (even in venvs)
+    shell: "python3 -m pipx ensurepath"
