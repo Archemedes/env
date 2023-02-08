@@ -51,6 +51,7 @@ function gitbf
   git checkout (echo $branch | sed "s:.* remotes/origin/::" | sed "s:.* ::")
 end
 
+# push a tag with certain name even if it already exists
 function gtag
     set -l tagname $argv[1]
     git tag --delete $tagname
