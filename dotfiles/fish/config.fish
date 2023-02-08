@@ -40,7 +40,7 @@ aka nv nvim
 aka g git
 aka fd fdfind
 
-set -gx PATH $HOME/.pyenv/bin $PATH
+set -gx PATH $HOME/.pyenv/bin $HOME/.local/bin $PATH
 set -gx PYENV_ROOT "$HOME/.pyenv"
 set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
 set -gx EXA_STANDARD_OPTIONS --long --all --icons
