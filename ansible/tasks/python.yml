@@ -25,3 +25,11 @@
 
 - name: ensure pipx path (even in venvs)
   shell: "python3 -m pipx ensurepath"
+
+- name: install some python packages using pipx
+  shell: "pipx install {{ item }}"
+  loop:
+    - flake8
+    - autopep8
+    - mypy
+    - isort
