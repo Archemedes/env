@@ -13,3 +13,9 @@
 
 - name: Run initial plugin installation
   shell: "vim +PluginInstall +qa!"
+
+# - name: Make sure docker is started and enabled
+#   ansible.builtin.systemd:
+#       name: docker
+#       state: started
+#       enabled: enabled
