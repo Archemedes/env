@@ -5,6 +5,7 @@
     install_recommends: true
     name: "{{ item }}"
   loop:
+    - vim
     - fish
     - zoxide
     - exa
