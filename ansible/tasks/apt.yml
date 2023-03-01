@@ -10,6 +10,7 @@
     - zoxide
     - exa
     - stow
+    - curl 
     - fzf
     - jq
     - fd-find
