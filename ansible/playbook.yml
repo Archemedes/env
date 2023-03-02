@@ -12,6 +12,7 @@
     - import_tasks: tasks/neovim.yml
     - import_tasks: tasks/kitty.yml
     - import_tasks: tasks/git.yml
+    - import_tasks: tasks/docker.yml
     - import_tasks: tasks/firefox.yml
     - import_tasks: tasks/snap.yml
     - import_tasks: tasks/python.yml

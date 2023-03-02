@@ -1,0 +1,68 @@
+---
+- name: Update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Install prerequisite packages
+  become: yes
+  apt:
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+
+- name: Create Docker keyring directory
+  become: yes
+  file:
+    path: /etc/apt/keyrings
+    mode: 0755
+    state: directory
+
+- name: Create dpkg_architecture variable
+  become: yes
+  command: dpkg --print-architecture
+  register: dpkg_architecture
+
+- name: Add Docker GPG key
+  become: yes
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    keyring: /etc/apt/keyrings/docker.gpg
+
+- name: Add Docker apt repository
+  become: yes
+  apt_repository:
+    filename: docker
+    repo: "deb [arch={{ dpkg_architecture.stdout }} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+
+- name: Update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Install Docker
+  become: yes
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+
+- name: Create Docker group
+  become: yes
+  group:
+    name: docker
+
+- name: Add current user to Docker group
+  become: yes
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: yes
