@@ -41,3 +41,35 @@
         state: auto
 
   when: ( kitty_present.stat is not defined ) or ( not kitty_present.stat.exists | bool )
+
+- name: Check if JetBrainsMono directory exists
+  stat:
+    path: "/usr/share/fonts/truetype/JetBrainsMono/"
+  register: font_dir_stat
+
+- name: Download and install JetBrainsMono nerd font
+  become: yes
+  block:
+    - name: Download JetBrains Mono nerd font zip file
+      get_url:
+        url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/JetBrainsMono.zip
+        dest: /tmp/JetBrainsMono.zip
+
+    - name: Create the font directory
+      ansible.builtin.file:
+        path: "{{ font_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Unzip the font file
+      unarchive:
+        src: /tmp/JetBrainsMono.zip
+        dest: "{{ font_dir }}"
+        remote_src: yes
+
+    - name: Update font cache
+      command: fc-cache -f -v
+  when: not font_dir_stat.stat.exists
+  vars:
+    font_dir: /usr/share/fonts/truetype/JetBrainsMono/
+
