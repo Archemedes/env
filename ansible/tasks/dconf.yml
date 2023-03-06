@@ -10,3 +10,8 @@
       volume-up: "['<Super>equal']"
       volume-mute: "['<Super>BackSpace']"
 
+# use 'man xkeyboard-config' for options
+- name: Set caps lock as escape modifier
+  dconf:
+    key: /org/gnome/desktop/input-sources/xkb-options
+    value: "['caps:escape_shifted_capslock']"
