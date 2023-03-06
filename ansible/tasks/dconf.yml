@@ -1,0 +1,12 @@
+---
+- name: Set volume keybinds
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/{{ item.key }}"
+    value: "{{ item.value }}"
+  with_dict: "{{ dconf_settings }}"
+  vars:
+    dconf_settings:
+      volume-down: "['<Super>minus']"
+      volume-up: "['<Super>equal']"
+      volume-mute: "['<Super>BackSpace']"
+

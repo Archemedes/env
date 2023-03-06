@@ -18,3 +18,4 @@
     - import_tasks: tasks/python.yml
     - import_tasks: tasks/stow.yml
     - import_tasks: tasks/dotfiles.yml
+    - import_tasks: tasks/dconf.yml
