@@ -35,7 +35,6 @@ function aka --argument-names new current
   complete -c $new -w $current
 end 
 
-aka z zoxide
 aka nv nvim
 aka g git
 aka fd fdfind
@@ -64,3 +63,4 @@ end
 
 if type -q pyenv; pyenv activate susipop 2> /dev/null; end
 starship init fish | source
+zoxide init fish | source
