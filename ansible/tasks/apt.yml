@@ -5,6 +5,7 @@
     install_recommends: true
     name: "{{ item }}"
   loop:
+    - aptitude
     - vim
     - fish
     - zoxide
@@ -14,4 +15,3 @@
     - fzf
     - jq
     - fd-find
-    - mpv
