@@ -378,10 +378,10 @@ augroup trailing_whitespace
     autocmd FileType python autocmd BufWritePre <buffer> silent! %s#\($\n\s*\)\+\%$##
 augroup ENDC
 
-augroup open_term
-    autocmd!
-    autocmd TerminalOpen * setlocal nobuflisted
-augroup ENDC
+" augroup open_term
+"     autocmd!
+"     autocmd TerminalOpen * setlocal nobuflisted
+" augroup ENDC
 
 function! FormatPython()
     silent exec "!isort -q %"
