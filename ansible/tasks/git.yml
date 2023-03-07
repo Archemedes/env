@@ -4,3 +4,4 @@
       repo: "{{ env_repo }}"
       dest: "{{ ansible_env.HOME }}/env"
       refspec: "{{ env_git_branch }}"
+    ignore_errors: yes  # In case we run locally on a changed repo
