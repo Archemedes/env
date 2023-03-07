@@ -6,7 +6,9 @@ It will live in `~/env`. A lot of commands implicitly assume this is where the r
 ## Running the ansible playbook
 
 Requires ansible be installed as well as the `community.general` collection.
-We prefer using ansible >=2.13.17 through pip. The following should work:
+We prefer using ansible >=2.13.17 through pip. 
+This will ensure that `ansible-galaxy` and some of the popular collections, such as `community.general`, are installed as well.
+The following should work on Ubuntu 22.04:
 
 ```bash
 sudo apt remove ansible -y # Old version may already exist
@@ -23,4 +25,10 @@ vagrant up
 vagrant provision # might be needed to run this if ssh authenthication fails
 ```
 
-using `vagrant ssh` should give a virtual machine environment correctly set up
+using `vagrant ssh` should give a virtual machine environment correctly set up.
+
+Alternatively, we can run the playbook locally on a fresh Ubuntu install:
+
+```
+ansible-playbook -c local -i localhost, playbook.yml --ask-become-pass
+```
