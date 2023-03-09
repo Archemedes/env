@@ -307,6 +307,9 @@ vnoremap <F12> :call ToggleSignColumn()<CR>
 nmap <leader>cm :G commit -m ""<left>
 nmap <leader>ce :G amend -n<CR>
 
+" Have the coc-settings.json file in .config
+let g:coc_config_home = '~/.config/vim/'
+
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
