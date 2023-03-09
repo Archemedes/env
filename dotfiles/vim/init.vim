@@ -1,42 +1,31 @@
 set nocompatible
 set encoding=UTF-8
 
-filetype on
-filetype plugin on
-filetype plugin indent on
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
 
-set rtp+=~/.vim/bundle/Vundle.vim  " Runtime path must include vundle repository directory
-call vundle#begin()
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+call plug#begin()
+Plug 'junegunn/fzf'              " Full path fuzzy search
+Plug 'junegunn/fzf.vim'          " Need main plugin as well as vimhook
 
-Plugin 'VundleVim/Vundle.vim'      " let Vundle manage Vundle, required
-Plugin 'junegunn/fzf'              " Full path fuzzy search
-Plugin 'junegunn/fzf.vim'          " Need main plugin as well as vimhook
+Plug 'tpope/vim-fugitive'        " Git integration
+Plug 'tpope/vim-surround'        " Surround things with brackets
+Plug 'tpope/vim-commentary'      " Commenting with gc
+Plug 'tpope/vim-repeat'          " dot operator for plugins
+Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'airblade/vim-gitgutter'    " Show what is modified in a file
+Plug 'machakann/vim-swap'        " Swapping function arguments
 
-Plugin 'tpope/vim-fugitive'        " Git integration
-Plugin 'tpope/vim-surround'        " Surround things with brackets
-Plugin 'tpope/vim-commentary'      " Commenting with gc
-Plugin 'tpope/vim-repeat'          " dot operator for plugins
-Plugin 'shumphrey/fugitive-gitlab.vim'
-Plugin 'airblade/vim-gitgutter'    " Show what is modified in a file
-Plugin 'machakann/vim-swap'        " Swapping function arguments
+Plug 'rakr/vim-one'              " onedark / onelight themes
+Plug 'bling/vim-bufferline'      " Buffers as tabs in the airline
+Plug 'vim-airline/vim-airline'   " Status line plugin
 
-Plugin 'rakr/vim-one'              " onedark / onelight themes
-Plugin 'bling/vim-bufferline'      " Buffers as tabs in the airline
-Plugin 'vim-airline/vim-airline'   " Status line plugin
-
-" Plugin 'tmhedberg/SimpylFold'
-" Plugin 'neoclide/coc.nvim'         " vscode IDE
-Plugin 'nvie/vim-flake8'           " Automatic flake8 on F7
-
-
-call vundle#end()
-
-syntax on " Activates syntax highlighting of code files
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvie/vim-flake8'           " Automatic flake8 on F7
+call plug#end()
 
 " Set up the color theme of the terminal
 set termguicolors " Use 24-bit true colors
