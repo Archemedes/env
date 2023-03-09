@@ -17,6 +17,7 @@ abbr -a pip. pip install -e .
 abbr -a gco git checkout
 abbr -a glog git log --no-decorate --oneline
 abbr -a gp git pull
+abbr -a yt ytfzf -md
 
 abbr -a awsaccounts 'aws organizations list-accounts --query "Accounts[*].[Name,Id]" --output table'
 abbr -a awsinstances 'aws ec2 describe-instances --profile customer-zero --query "Reservations[*].Instances[0].[InstanceId,State.Name]"'
