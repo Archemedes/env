@@ -54,3 +54,4 @@
     - autopep8
     - mypy
     - isort
+    - poetry
