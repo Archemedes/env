@@ -1,4 +1,7 @@
 ---
+- name: Install vim plugins
+  shell: vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
+
 - name: Check if neovim is installed
   ansible.builtin.stat:
     path: /usr/bin/nvim
