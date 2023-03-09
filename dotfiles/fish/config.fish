@@ -61,6 +61,5 @@ function gtag
     git push origin $tagname
 end
 
-if type -q pyenv; pyenv activate susipop 2> /dev/null; end
 starship init fish | source
 zoxide init fish | source
