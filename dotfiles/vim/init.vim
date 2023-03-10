@@ -23,6 +23,8 @@ Plug 'rakr/vim-one'              " onedark / onelight themes
 Plug 'bling/vim-bufferline'      " Buffers as tabs in the airline
 Plug 'vim-airline/vim-airline'   " Status line plugin
 
+Plug 'khaveesh/vim-fish-syntax'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvie/vim-flake8'           " Automatic flake8 on F7
 call plug#end()
@@ -372,7 +374,7 @@ augroup ENDC
 
 
 function! CreateTerminalInstance()
-    let bufnr = term_start(&shell, {"hidden": 0, "vertical": 1})
+    let bufnr = term_start(&shell, {"vertical": 1})
     if bufnr
         call setbufvar(bufnr, "buflisted", 0)
     endif
