@@ -370,6 +370,16 @@ augroup trailing_whitespace
     autocmd FileType python autocmd BufWritePre <buffer> silent! %s#\($\n\s*\)\+\%$##
 augroup ENDC
 
+
+function! CreateTerminalInstance()
+    let bufnr = term_start(&shell, {"hidden": 0, "vertical": 1})
+    if bufnr
+        call setbufvar(bufnr, "buflisted", 0)
+    endif
+endfunction
+
+nnoremap <silent> <leader>t :<C-u>call CreateTerminalInstance()<CR>
+tnoremap <silent> <C-c> <C-\><C-n>:bd!<CR>
 " augroup open_term
 "     autocmd!
 "     autocmd TerminalOpen * setlocal nobuflisted
