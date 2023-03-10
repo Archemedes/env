@@ -374,14 +374,14 @@ augroup ENDC
 
 
 function! CreateTerminalInstance()
-    let bufnr = term_start(&shell, {"vertical": 1})
-    if bufnr
+    execute "vertical terminal"
+    let l:bufnr = bufnr('$')
+    if l:bufnr
         call setbufvar(bufnr, "buflisted", 0)
     endif
 endfunction
 
 nnoremap <silent> <leader>t :<C-u>call CreateTerminalInstance()<CR>
-tnoremap <silent> <C-d> <C-\><C-n>:bd!<CR>
 " augroup open_term
 "     autocmd!
 "     autocmd TerminalOpen * setlocal nobuflisted
