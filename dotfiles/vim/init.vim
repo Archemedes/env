@@ -381,7 +381,7 @@ function! CreateTerminalInstance()
 endfunction
 
 nnoremap <silent> <leader>t :<C-u>call CreateTerminalInstance()<CR>
-tnoremap <silent> <C-c> <C-\><C-n>:bd!<CR>
+tnoremap <silent> <C-d> <C-\><C-n>:bd!<CR>
 " augroup open_term
 "     autocmd!
 "     autocmd TerminalOpen * setlocal nobuflisted
