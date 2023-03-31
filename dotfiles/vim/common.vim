@@ -1,5 +1,7 @@
 " Configuration I use both for vim and neovim
 
+map <space> <leader>
+
 " Join Lines with new keybinding
 nnoremap <leader>j J
 nnoremap <leader>J :m-2<CR>J
@@ -19,6 +21,11 @@ function! StartOfLine()
 endfunction
 
 nnoremap <silent> 0 :<C-U>call StartOfLine()<CR>
+
+" Some FZF keybindings that are useful
+nmap <leader>g :GFiles<CR>
+nmap <leader>l :Lines<CR>
+nmap <leader>b :Buffer<CR>
 
 " Moving lines up or down through other lines
 nnoremap <M-J> :m .+1<CR>==

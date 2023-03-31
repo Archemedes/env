@@ -77,9 +77,6 @@ silent! colorscheme one
 let g:markbar_peekaboo_marks_to_display = '''.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:markbar_peekaboo_width= 50
 
-" let mapleader = " "
-map <space> <leader>
-
 " put method def under cursor
 map <leader>m [mw
 
@@ -88,11 +85,6 @@ nnoremap <leader>/ :nohl<CR>
 
 "Easily exit buffer
 nnoremap <leader>q :bd<CR>
-
-" Some FZF keybindings that are useful
-nmap <leader>g :GFiles<CR>
-nmap <leader>l :Lines<CR>
-nmap <leader>b :Buffer<CR>
 
 " Custom register (p is easily combo'd) for commands I consider cut-only
 noremap x "px
