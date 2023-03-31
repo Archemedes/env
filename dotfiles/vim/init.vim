@@ -26,7 +26,7 @@ Plug 'vim-airline/vim-airline'   " Status line plugin
 Plug 'khaveesh/vim-fish-syntax'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'nvie/vim-flake8'           " Automatic flake8 on F7
+" Plug 'nvie/vim-flake8'           " Automatic flake8 on F7
 call plug#end()
 
 " Set up the color theme of the terminal
@@ -80,10 +80,6 @@ let g:markbar_peekaboo_width= 50
 " let mapleader = " "
 map <space> <leader>
 
-" Join Lines with new keybinding
-nnoremap <leader>j J
-nnoremap <leader>J :m-2<CR>J
-
 " put method def under cursor
 map <leader>m [mw
 
@@ -105,12 +101,6 @@ noremap c "pc
 noremap cc "pcc
 noremap C "pC
 vnoremap p "pdP
-
-" Commands to more easily switch between splits 
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 
 nnoremap <leader><space> <C-^>
 
@@ -141,47 +131,6 @@ imap <A-J> <down>
 imap <A-K> <up>
 imap <A-H> <left>
 imap <A-L> <right>
-
-
-function! StartOfLine()
-    let pos = getcurpos()[2]
-    normal! ^
-    if pos == getcurpos()[2]
-        normal! 0
-    endif
-endfunction
-
-nnoremap <silent> 0 :<C-U>call StartOfLine()<CR>
-
-" Moving lines up or down through other lines
-nnoremap <M-J> :m .+1<CR>==
-nnoremap <M-K> :m .-2<CR>==
-vnoremap <M-J> :m '>+1<CR>gv=gv
-vnoremap <M-K> :m '<-2<CR>gv=gv
-
-function! JumpToNextWord(bw)
-    for i in range(max([1,v:count]))
-        if a:bw
-            normal b
-        else
-            normal w
-        endif
-        while strpart(getline('.'), col('.')-1, 1) !~ '\w'
-            if a:bw
-                normal b
-            else
-                normal w
-            endif
-        endwhile
-    endfor
-endfunction
-
-" Put macros on Q (stop butterfingering macro activate)
-noremap Q q
-" then put q for more inclusive w search
-noremap <silent> <Tab> :<C-U>call JumpToNextWord(0)<CR>
-
-
 
 " Manually refresh file
 nmap <F5> :e!<cr>
@@ -261,7 +210,7 @@ autocmd InsertEnter,InsertLeave * set cul!
 " Restore last position of previously closed file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif 
 
-autocmd BufWritePost *.py call flake8#Flake8()
+" autocmd BufWritePost *.py call flake8#Flake8()
 
 if has('terminal') "Terminal One-Dark colors.
     let g:terminal_ansi_colors = [
@@ -386,14 +335,6 @@ nnoremap <silent> <leader>t :<C-u>call CreateTerminalInstance()<CR>
 "     autocmd!
 "     autocmd TerminalOpen * setlocal nobuflisted
 " augroup ENDC
-
-function! FormatPython()
-    silent exec "!isort -q %"
-    silent exec "!autopep8 --in-place --ignore=E731 %"
-    silent exec "!autoflake8 --in-place %"
-    redraw!
-    e!
-endfunction
 
 function! FindImport()
     let wordUnderCursor = expand("<cword>")
