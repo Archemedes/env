@@ -40,6 +40,7 @@ aka nv nvim
 aka g git
 aka fd fdfind
 
+set -gx TERM xterm-kitty
 set -gx PATH $HOME/.pyenv/bin $HOME/.local/bin $PATH
 set -gx PYENV_ROOT "$HOME/.pyenv"
 set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
