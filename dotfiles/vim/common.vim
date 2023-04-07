@@ -27,6 +27,11 @@ nmap <leader>g :GFiles<CR>
 nmap <leader>l :Lines<CR>
 nmap <leader>b :Buffer<CR>
 
+" Turn off search highlighting
+nnoremap <leader>/ :nohl<CR>
+"Easily exit buffer
+nnoremap <leader>q :bd<CR>
+
 " Moving lines up or down through other lines
 nnoremap <M-J> :m .+1<CR>==
 nnoremap <M-K> :m .-2<CR>==

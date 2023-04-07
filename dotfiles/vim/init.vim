@@ -80,11 +80,6 @@ let g:markbar_peekaboo_width= 50
 " put method def under cursor
 map <leader>m [mw
 
-" Turn off search highlighting
-nnoremap <leader>/ :nohl<CR>
-
-"Easily exit buffer
-nnoremap <leader>q :bd<CR>
 
 " Custom register (p is easily combo'd) for commands I consider cut-only
 noremap x "px
