@@ -18,6 +18,7 @@ Plug 'tpope/vim-repeat'          " dot operator for plugins
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'airblade/vim-gitgutter'    " Show what is modified in a file
 Plug 'machakann/vim-swap'        " Swapping function arguments
+Plug 'machakann/vim-highlightedyank'
 
 Plug 'rakr/vim-one'              " onedark / onelight themes
 Plug 'bling/vim-bufferline'      " Buffers as tabs in the airline
@@ -44,6 +45,8 @@ let g:airline_section_x = ''
 let g:airline_symbols = {}
 let g:airline_symbols.notexists = '🔕'
 let g:airline#extensions#coc#enabled = 0
+
+let g:highlightedyank_highlight_duration = 150
 
 " So that on inactive windows only the currently opened file + path is shown
 function! Render_Only_File(...)
@@ -73,6 +76,7 @@ let g:bufferline_modified = ' ✏️ '
 
 set background=dark
 silent! colorscheme one
+highlight HighlightedyankRegion ctermbg=242 guibg=Grey50
 
 let g:markbar_peekaboo_marks_to_display = '''.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:markbar_peekaboo_width= 50
