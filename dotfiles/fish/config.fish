@@ -46,6 +46,13 @@ set -gx PYENV_ROOT "$HOME/.pyenv"
 set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
 set -gx EXA_STANDARD_OPTIONS --long --all --icons
 
+# Keeping extra setup that is project-specific and I don't actually want in my dotfiles repo
+if test -d extra
+  for f in extra/*.fish
+    source $f
+  end
+end
+
 # fzf for selecting branches when we have a lot of branches
 function gitbf
   set -l branches (git branch -a | string split0)
