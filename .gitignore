@@ -1,2 +1,4 @@
 .vagrant
 *.log
+
+dotfiles/fish/extra/
