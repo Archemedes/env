@@ -27,7 +27,7 @@ Plug 'vim-airline/vim-airline'   " Status line plugin
 Plug 'khaveesh/vim-fish-syntax'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'nvie/vim-flake8'           " Automatic flake8 on F7
+Plug 'nvie/vim-flake8'           " Automatic flake8 on F7
 call plug#end()
 
 " Set up the color theme of the terminal
@@ -76,7 +76,7 @@ let g:bufferline_modified = ' ✏️ '
 
 set background=dark
 silent! colorscheme one
-highlight HighlightedyankRegion ctermbg=242 guibg=Grey50
+highlight HighlightedyankRegion term=reverse ctermbg=17 guibg=#3e4452
 
 let g:markbar_peekaboo_marks_to_display = '''.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:markbar_peekaboo_width= 50
@@ -150,39 +150,14 @@ onoremap au :normal viu<CR>
 set list
 set listchars=tab:!·,trail:•
 
-set clipboard=unnamedplus  " Use system clipboard for yanks
 set incsearch  " Start searching from the first keystroke
 set hlsearch   " Highlight search matches in text
-set ignorecase " Search is case-insensitive by default
-set smartcase  " Search becomes case-sensitive if anything is uppercase
 
-" Highlight the line on which the cursor lives.
-set cursorline
-
-" Show some lines above/below the cursor.
-set scrolloff=1
-
-" Enable folding
-set foldmethod=indent
-set foldlevel=99
-set foldminlines=4
-
-set timeoutlen=500 " Mapping timeout
-set ttimeoutlen=20 " Keychord timeout
-set updatetime=100 " time vim writes to swapfile; quicker vim gutter updates
-
-set autoindent
 set backspace=indent,eol,start
-
-set tabstop=4
-set expandtab
-set shiftwidth=4
 
 set hidden         " Change buffer without having to save right away
 set noshowmode     " Don't repeat the mode since airline shows it
 set splitright     " Open vertical split to the right of current file
-set number         " Line numbers
-set relativenumber " Relative line numbers
 set lazyredraw     " Only redraws at end of macro/paste/nontyped command (for performance)
 set wildmenu       " This shows suggestions in statusbar on tab
 set undofile       " Persistent undos between vim sessions
@@ -255,7 +230,6 @@ let g:coc_config_home = '~/.config/vim/'
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-autocmd FileType python let b:coc_root_patterns = ['pyrightconfig.json']
 
 " <Tab> accepts completion
 inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<C-g>u\<TAB>"
@@ -312,6 +286,10 @@ augroup trailing_whitespace
     autocmd FileType python autocmd BufWritePre <buffer> silent! %s#\($\n\s*\)\+\%$##
 augroup ENDC
 
+augroup pythonconfig
+    autocmd FileType python let b:coc_root_patterns = ['pyrightconfig.json']
+    autocmd FileType python setlocal colorcolumn=120
+augroup END
 
 function! CreateTerminalInstance()
     execute "vertical terminal"

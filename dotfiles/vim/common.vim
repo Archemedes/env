@@ -2,6 +2,32 @@
 
 map <space> <leader>
 
+set nofixeol   " Mimic IntelliJ, which doesnt add eols I think
+set clipboard=unnamed  " Use system clipboard for yanks
+set ignorecase " Search is case-insensitive by default
+set smartcase  " Search becomes case-sensitive if anything is uppercase
+set cursorline " Highlight the line on which the cursor lives.
+set scrolloff=1 " Show some lines above/below the cursor.
+set number         " Line numbers
+set relativenumber " Relative line numbers
+
+set autoindent
+set smartindent
+
+" Note nvim 0.9 supports .editorconfig which should override this
+set tabstop=4
+set expandtab
+set shiftwidth=4
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+set foldminlines=4
+
+set timeoutlen=500 " Mapping timeout
+set ttimeoutlen=20 " Keychord timeout
+set updatetime=100 " time vim writes to swapfile; quicker vim gutter updates
+
 " Join Lines with new keybinding
 nnoremap <leader>j J
 nnoremap <leader>J :m-2<CR>J
@@ -62,9 +88,9 @@ noremap <silent> <Tab> :<C-U>call JumpToNextWord(0)<CR>
 
 function! FormatPython()
     silent exec "!isort -q %"
-    silent exec "!black %"
-    " silent exec "!autopep8 --in-place --ignore=E731 %"
-    " silent exec "!autoflake8 --in-place %"
+    " silent exec "!black %"
+    silent exec "!autopep8 --in-place --ignore=E731 %"
+    silent exec "!autoflake8 --in-place %"
     redraw!
     e!
 endfunction
