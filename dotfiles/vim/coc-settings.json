@@ -1,9 +1,14 @@
 {
-  "coc.preferences.rootPatterns": [
+  "workspace.rootPatterns": [
     ".git",
     ".hg",
     ".projections.json"
   ],
+  "inlayHint.enable": false,
+  "diagnostic.virtualText": false,
+  "python.linting.pylintEnabled": true,
+  "python.linting.flake8Enabled": true,
+  "diagnostic.checkCurrentLine": true,
   "coc.source.buffer.enable": false,
   "suggest.noselect": false,
   "suggest.completionItemKindLabels": {
