@@ -32,6 +32,8 @@ set updatetime=100 " time vim writes to swapfile; quicker vim gutter updates
 nnoremap <leader>j J
 nnoremap <leader>J :m-2<CR>J
 
+nnoremap <leader><space> <C-^>
+
 " Commands to more easily switch between splits 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j

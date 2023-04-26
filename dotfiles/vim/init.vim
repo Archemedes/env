@@ -93,8 +93,6 @@ noremap cc "pcc
 noremap C "pC
 vnoremap p "pdP
 
-nnoremap <leader><space> <C-^>
-
 " Terminal CTRL commands for line navigation
 imap <C-a> <home>
 imap <C-e> <end>
