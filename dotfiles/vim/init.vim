@@ -99,10 +99,6 @@ imap <C-e> <end>
 cmap <C-a> <home>
 cmap <C-e> <end>
 
-" Move between buffers, vimium-style
-nnoremap J :bp<CR>
-nnoremap K :bn<CR>
-
 " Yank till end of line with Y
 map Y yg_
 

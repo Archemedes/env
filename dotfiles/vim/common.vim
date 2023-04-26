@@ -28,6 +28,10 @@ set timeoutlen=500 " Mapping timeout
 set ttimeoutlen=20 " Keychord timeout
 set updatetime=100 " time vim writes to swapfile; quicker vim gutter updates
 
+" Move between buffers, vimium-style
+nnoremap J :bp<CR>
+nnoremap K :bn<CR>
+
 " Join Lines with new keybinding
 nnoremap <leader>j J
 nnoremap <leader>J :m-2<CR>J
