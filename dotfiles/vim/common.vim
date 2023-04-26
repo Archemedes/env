@@ -44,6 +44,12 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Terminal CTRL commands for line navigation
+imap <C-a> <home>
+imap <C-e> <end>
+cmap <C-a> <home>
+cmap <C-e> <end>
+
 function! StartOfLine()
     let pos = getcurpos()[2]
     normal! ^

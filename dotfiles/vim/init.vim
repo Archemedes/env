@@ -93,12 +93,6 @@ noremap cc "pcc
 noremap C "pC
 vnoremap p "pdP
 
-" Terminal CTRL commands for line navigation
-imap <C-a> <home>
-imap <C-e> <end>
-cmap <C-a> <home>
-cmap <C-e> <end>
-
 " Yank till end of line with Y
 map Y yg_
 
