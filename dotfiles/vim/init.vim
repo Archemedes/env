@@ -212,6 +212,11 @@ vnoremap <F12> :call ToggleSignColumn()<CR>
 nmap <leader>cm :G commit -m ""<left>
 nmap <leader>ce :G amend -n<CR>
 
+" Some FZF keybindings that are useful
+nmap <leader>g :GFiles<CR>
+nmap <leader>l :Lines<CR>
+nmap <leader>b :Buffer<CR>
+
 " Have the coc-settings.json file in .config
 let g:coc_config_home = '~/.config/vim/'
 

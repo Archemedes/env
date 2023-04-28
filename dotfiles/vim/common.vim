@@ -60,11 +60,6 @@ endfunction
 
 nnoremap <silent> 0 :<C-U>call StartOfLine()<CR>
 
-" Some FZF keybindings that are useful
-nmap <leader>g :GFiles<CR>
-nmap <leader>l :Lines<CR>
-nmap <leader>b :Buffer<CR>
-
 " Turn off search highlighting
 nnoremap <leader>/ :nohl<CR>
 "Easily exit buffer
