@@ -7,6 +7,7 @@ set clipboard=unnamed  " Use system clipboard for yanks
 set ignorecase " Search is case-insensitive by default
 set smartcase  " Search becomes case-sensitive if anything is uppercase
 set cursorline " Highlight the line on which the cursor lives.
+set noshowmode " Don't repeat the mode since airline shows it
 set scrolloff=1 " Show some lines above/below the cursor.
 set number         " Line numbers
 set relativenumber " Relative line numbers

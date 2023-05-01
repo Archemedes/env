@@ -144,7 +144,6 @@ set hlsearch   " Highlight search matches in text
 set backspace=indent,eol,start
 
 set hidden         " Change buffer without having to save right away
-set noshowmode     " Don't repeat the mode since airline shows it
 set splitright     " Open vertical split to the right of current file
 set lazyredraw     " Only redraws at end of macro/paste/nontyped command (for performance)
 set wildmenu       " This shows suggestions in statusbar on tab
