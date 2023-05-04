@@ -48,7 +48,7 @@ set -gx EXA_STANDARD_OPTIONS --long --all --icons
 
 # Keeping extra setup that is project-specific and I don't actually want in my dotfiles repo
 if test -d extra
-  for f in extra/*.fish
+  for f in $PWD/extra/*.fish
     source $f
   end
 end
