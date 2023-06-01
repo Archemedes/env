@@ -66,6 +66,14 @@ nnoremap <leader>/ :nohl<CR>
 "Easily exit buffer
 nnoremap <leader>q :bd<CR>
 
+" Custom register (p is easily combo'd) for commands I consider cut-only
+noremap x "px
+noremap X "pX
+noremap c "pc
+noremap cc "pcc
+noremap C "pC
+vnoremap p "pdP
+
 " Moving lines up or down through other lines
 nnoremap <M-J> :m .+1<CR>==
 nnoremap <M-K> :m .-2<CR>==

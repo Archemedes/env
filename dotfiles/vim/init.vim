@@ -85,14 +85,6 @@ let g:markbar_peekaboo_width= 50
 map <leader>m [mw
 
 
-" Custom register (p is easily combo'd) for commands I consider cut-only
-noremap x "px
-noremap X "pX
-noremap c "pc
-noremap cc "pcc
-noremap C "pC
-vnoremap p "pdP
-
 " Yank till end of line with Y
 map Y yg_
 
