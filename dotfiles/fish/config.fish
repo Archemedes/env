@@ -47,7 +47,7 @@ set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
 set -gx EXA_STANDARD_OPTIONS --long --all --icons
 
 # Keeping extra setup that is project-specific and I don't actually want in my dotfiles repo
-if test -d extra
+if test -d $PWD/extra
   for f in $PWD/extra/*.fish
     source $f
   end
