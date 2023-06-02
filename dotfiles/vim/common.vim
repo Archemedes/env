@@ -20,6 +20,10 @@ set tabstop=4
 set expandtab
 set shiftwidth=4
 
+" Display different types of white spaces.
+set list
+set listchars=tab:!·,trail:•
+
 " Enable folding
 set foldmethod=indent
 set foldlevel=99

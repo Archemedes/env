@@ -126,10 +126,6 @@ onoremap au :normal viu<CR>
 " Toggle auto change directory
 " map <F8> :set autochdir! autochdir?<CR>
 
-" Display different types of white spaces.
-set list
-set listchars=tab:!·,trail:•
-
 set incsearch  " Start searching from the first keystroke
 set hlsearch   " Highlight search matches in text
 
