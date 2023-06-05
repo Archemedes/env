@@ -1,9 +1,9 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
-    if type -q pyenv
-        pyenv init - | source
-        pyenv virtualenv-init - | source
-    end
+  # Commands to run in interactive sessions can go here
+  if type -q pyenv; and not set -q VIRTUAL_ENV
+      pyenv init - | source
+      pyenv virtualenv-init - | source
+  end
 end
 
 function fish_greeting
