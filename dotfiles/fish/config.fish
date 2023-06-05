@@ -7,7 +7,6 @@ if status is-interactive
 end
 
 function fish_greeting
-    echo ''
 end
 
 abbr -a gs git status
