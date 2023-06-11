@@ -23,9 +23,6 @@ require('lazy').setup('plugins')
 -- Folding based on TreeSitter; shoud be slightly better for python
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 
-vim.keymap.set('n', "<leader>cm", ':G commit -m ""<left>')
-vim.keymap.set('n', "<leader>ce", ':G amend -n<CR>')
-
 vim.cmd [[hi lualine_c_normal gui=bold guifg=#dddddd]]
 vim.cmd [[hi CursorLineNR gui=bold guifg=#dddddd]]
 
