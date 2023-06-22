@@ -46,8 +46,8 @@ set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
 set -gx EXA_STANDARD_OPTIONS --long --all --icons
 
 # Keeping project-specific setup I don't actually want in my dotfiles repo
-if test -d ~/.config/fish/extra
-  for f in ~/.config/fish/extra/*.fish
+if test -d "$__fish_config_dir/extra"
+  for f in $__fish_config_dir/extra/*.fish
     source $f
   end
 end
