@@ -38,6 +38,7 @@ end
 aka nv nvim
 aka g git
 aka fd fdfind
+aka k kubectl
 
 set -gx TERM xterm-kitty
 set -gx PATH $HOME/.pyenv/bin $HOME/.local/bin $PATH
@@ -71,3 +72,7 @@ end
 
 starship init fish | source
 zoxide init fish | source
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+set --export --prepend PATH "/Users/pepijnbakker/.rd/bin"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
