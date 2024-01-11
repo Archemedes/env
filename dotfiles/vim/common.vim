@@ -79,10 +79,10 @@ noremap C "pC
 vnoremap p "pdP
 
 " Moving lines up or down through other lines
-nnoremap <M-J> :m .+1<CR>==
-nnoremap <M-K> :m .-2<CR>==
-vnoremap <M-J> :m '>+1<CR>gv=gv
-vnoremap <M-K> :m '<-2<CR>gv=gv
+nnoremap <M-j> :m .+1<CR>==
+nnoremap <M-k> :m .-2<CR>==
+vnoremap <M-j> :m '>+1<CR>gv=gv
+vnoremap <M-k> :m '<-2<CR>gv=gv
 
 function! JumpToNextWord(bw)
     for i in range(max([1,v:count]))
