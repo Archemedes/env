@@ -10,6 +10,7 @@ function fish_greeting
 end
 
 abbr -a gs git status
+abbr -a gcm git commit -m 
 abbr -a jl jupyter-lab
 abbr -a pyv pyenv activate
 abbr -a pip. pip install -e .
