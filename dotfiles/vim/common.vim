@@ -73,9 +73,13 @@ nnoremap <leader>/ :nohl<CR>
 "Easily exit buffer
 nnoremap <leader>q :bd<CR>
 
+" Deleting chars before cursor I never use, but delete line without polluting
+" default register is very nice, so I make X that.
+" My 'p' is sort of like an 'alternative' register
+noremap X "pdd
+
 " Custom register (p is easily combo'd) for commands I consider cut-only
 noremap x "px
-noremap X "pX
 noremap c "pc
 noremap cc "pcc
 noremap C "pC
