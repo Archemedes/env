@@ -65,6 +65,9 @@ endfunction
 
 nnoremap <silent> 0 :<C-U>call StartOfLine()<CR>
 
+" This is substitute-in-word. Pretty useful
+nnoremap s viwpyiw
+
 " Turn off search highlighting
 nnoremap <leader>/ :nohl<CR>
 "Easily exit buffer
