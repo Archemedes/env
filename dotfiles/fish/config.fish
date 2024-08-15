@@ -1,8 +1,10 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 if status is-interactive
   # Commands to run in interactive sessions can go here
   if type -q pyenv; and not set -q VIRTUAL_ENV
       pyenv init - | source
-      pyenv virtualenv-init - | source
+      # pyenv virtualenv-init - | source
   end
 end
 
@@ -40,8 +42,8 @@ end
 
 aka nv nvim
 aka g git
-aka fd fdfind
 aka k kubectl
+aka py python
 
 set -gx TERM xterm-kitty
 set -gx PATH $HOME/.pyenv/bin $HOME/.local/bin $PATH
