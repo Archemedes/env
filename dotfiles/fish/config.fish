@@ -20,6 +20,7 @@ abbr -a gco git checkout
 abbr -a glog git log --no-decorate --oneline
 abbr -a gp git pull
 abbr -a yt ytfzf -md
+abbr -a venv source .venv/bin/activate.fish
 abbr -a psh poetry shell
 
 abbr -a awsaccounts 'aws organizations list-accounts --query "Accounts[*].[Name,Id]" --output table'
