@@ -1,20 +1,11 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-if status is-interactive
-  # Commands to run in interactive sessions can go here
-  if type -q pyenv; and not set -q VIRTUAL_ENV
-      pyenv init - | source
-      # pyenv virtualenv-init - | source
-  end
-end
-
 function fish_greeting
 end
 
 abbr -a gs git status
 abbr -a gcm git commit -m 
 abbr -a jl jupyter-lab
-abbr -a pyv pyenv activate
 abbr -a pip. pip install -e .
 abbr -a gco git checkout
 abbr -a glog git log --no-decorate --oneline
@@ -47,9 +38,6 @@ aka k kubectl
 aka py python
 
 set -gx TERM xterm-kitty
-set -gx PATH $HOME/.pyenv/bin $HOME/.local/bin $PATH
-set -gx PYENV_ROOT "$HOME/.pyenv"
-set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
 set -gx EXA_STANDARD_OPTIONS --long --all --icons
 
 # Keeping project-specific setup I don't actually want in my dotfiles repo
