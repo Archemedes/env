@@ -25,7 +25,6 @@ alias .....="cd ../../../.."
 alias cd.="cd (readlink -f .)" #Switch symlink
 
 alias icat="kitty +kitten icat"
-alias penv "source (poetry env info --path)/bin/activate.fish"
 
 function aka --argument-names new current
   alias $new=$current
