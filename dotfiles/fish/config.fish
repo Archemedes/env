@@ -13,6 +13,8 @@ abbr -a gp git pull
 abbr -a yt ytfzf -md
 abbr -a venv source .venv/bin/activate.fish
 abbr -a psh poetry shell
+abbr -a pr poetry run
+abbr -a ji jira
 
 abbr -a awsaccounts 'aws organizations list-accounts --query "Accounts[*].[Name,Id]" --output table'
 abbr -a awsinstances 'aws ec2 describe-instances --profile customer-zero --query "Reservations[*].Instances[0].[InstanceId,State.Name]"'
@@ -37,6 +39,7 @@ aka k kubectl
 aka py python
 
 set -gx TERM xterm-kitty
+set -gx EDITOR nvim
 set -gx EXA_STANDARD_OPTIONS --long --all --icons
 set -gx fish_user_paths "$HOME/.local/bin"
 
