@@ -72,6 +72,8 @@ nnoremap S viwpyiw
 nnoremap <leader>/ :nohl<CR>
 "Easily exit buffer
 nnoremap <leader>q :bd<CR>
+"Exit all EXCEPT this one
+nnoremap <leader>Q :%bd\|e#\|bd#<CR>
 
 " Deleting chars before cursor I never use, but delete line without polluting
 " default register is very nice, so I make X that.
@@ -123,9 +125,3 @@ function! FormatPython()
 endfunction
 
 nnoremap <leader>cq :call FormatPython()<CR>
-
-
-function! SynGroup()
-    let l:s = synID(line('.'), col('.'), 1)
-    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-endfun
