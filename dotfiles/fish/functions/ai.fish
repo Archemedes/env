@@ -1,8 +1,7 @@
 set -gx OPENAI_API_KEY (pass api/openai)
 set -gx ANTHROPIC_API_KEY (pass api/anthropic)
 
-set -g _ai_system_prompt (cat $__fish_config_dir/extra/system_prompt)
-
+set -g _ai_system_prompt (cat $__fish_config_dir/functions/system_prompt)
 
 function ai --description "Send a prompt to Claude"
     argparse 'm/model=' 's/system=' 'c/chat' 'n/nochat' -- $argv; or return
@@ -37,4 +36,3 @@ function ai --description "Send a prompt to Claude"
 end
 
 
-alias aigc 'git commit -m (ai -n "Generate a git semantic commit message from the following diff: $(git diff --cached HEAD | string escape)")'

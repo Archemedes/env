@@ -43,12 +43,16 @@ set -gx EDITOR nvim
 set -gx EXA_STANDARD_OPTIONS --long --all --icons
 set -gx fish_user_paths "$HOME/.local/bin"
 
+
 # Keeping project-specific setup I don't actually want in my dotfiles repo
 if test -d "$__fish_config_dir/extra"
   for f in $__fish_config_dir/extra/*.fish
     source $f
   end
 end
+
+alias aigc 'git commit -m (ai -n "Generate a git semantic commit message from the following diff: $(git diff --cached HEAD | string escape)")'
+
 
 # fzf for selecting branches when we have a lot of branches
 function gitbf
