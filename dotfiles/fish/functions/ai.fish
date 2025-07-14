@@ -4,7 +4,7 @@ set -gx ANTHROPIC_API_KEY (pass api/anthropic)
 set -g _ai_system_prompt (cat $__fish_config_dir/functions/system_prompt)
 
 function ai --description "Send a prompt to Claude"
-    argparse 'm/model=' 's/system=' 'c/chat' 'n/nochat' -- $argv; or return
+    argparse 'm/model=' 's/system=' 'c/chat' 'n/nochat' 'h/history' -- $argv; or return
     set -q _flag_model; or set _flag_model claude-4-sonnet-20250514
     set -q _flag_system; or set _flag_system $_ai_system_prompt
 
@@ -15,7 +15,12 @@ function ai --description "Send a prompt to Claude"
         set prompt (string join " " $argv)
     end
 
-    test -n "$prompt"; or begin; echo "Usage: ai [-m/--model MODEL] [-s/--system SYSTEM] <prompt>"; return 1; end
+    test -n "$prompt"; or begin; echo "Usage: ai [-m/--model MODEL] [-s/--system SYSTEM] [-h/--history] <prompt>"; return 1; end
+
+    if set -q _flag_history
+        set shell_history (kitty @ get-text --extent=screen)
+        set prompt "$prompt\n\nFor context, this is the recent output of the terminal session:\n$shell_history"
+    end
 
     set -q _flag_chat || set -q _flag_nochat || set -U _ai_history
     set history_json "[$_ai_history]"
@@ -34,5 +39,3 @@ function ai --description "Send a prompt to Claude"
 
     printf '%s\n' $response
 end
-
-
