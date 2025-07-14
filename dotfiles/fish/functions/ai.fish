@@ -4,9 +4,14 @@ set -gx ANTHROPIC_API_KEY (pass api/anthropic)
 set -g _ai_system_prompt (cat $__fish_config_dir/functions/system_prompt)
 
 function ai --description "Send a prompt to Claude"
-    argparse 'm/model=' 's/system=' 'c/chat' 'n/nochat' 'h/history' -- $argv; or return
+    argparse 'm/model=' 's/system=' 'c/chat' 'n/nochat' 'h/history=?' -- $argv; or return
     set -q _flag_model; or set _flag_model claude-4-sonnet-20250514
     set -q _flag_system; or set _flag_system $_ai_system_prompt
+
+    # Handle history flag: if -h is used without parameter, default to 'last_non_empty_output'
+    if set -q _flag_history; and test -z "$_flag_history"
+        set _flag_history last_non_empty_output
+    end
 
     if not isatty stdin
         while read -l line; set -a prompt $line; end
@@ -18,7 +23,7 @@ function ai --description "Send a prompt to Claude"
     test -n "$prompt"; or begin; echo "Usage: ai [-m/--model MODEL] [-s/--system SYSTEM] [-h/--history] <prompt>"; return 1; end
 
     if set -q _flag_history
-        set shell_history (kitty @ get-text --extent=screen)
+        set shell_history (kitty @ get-text --extent=$_flag_history)
         set prompt "$prompt\n\nFor context, this is the recent output of the terminal session:\n$shell_history"
     end
 
