@@ -116,10 +116,25 @@ function! JumpToNextWord(bw)
     endfor
 endfunction
 
+function! JumpToNextUnderscore(bw)
+    for i in range(max([1,v:count]))
+        if a:bw
+            " Search backwards for underscore followed by any character
+            call search('[_-]\zs.', 'bW')
+        else
+            " Search forwards for underscore followed by any character
+            call search('[_-]\zs.', 'W')
+        endif
+    endfor
+endfunction
+
+" Some useful word jumps
+noremap <silent> <Tab> :<C-U>call JumpToNextWord(0)<CR>
+noremap <silent> <S-Tab> :<C-U>call JumpToNextUnderscore(0)<CR>
+
 " Put macros on Q (stop butterfingering macro activate)
 noremap Q q
-" then put q for more inclusive w search
-noremap <silent> <Tab> :<C-U>call JumpToNextWord(0)<CR>
+
 
 function! FormatPython()
     silent exec "!isort -q %"
