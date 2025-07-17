@@ -13,12 +13,13 @@ function ai --description "Send a prompt to Claude"
         set _flag_history last_non_empty_output
     end
 
-    if not isatty stdin
-        while read -l line; set -a prompt $line; end
-        set prompt (string join \n $prompt)
-    else
-        set prompt (string join " " $argv)
-    end
+    set prompt (string join " " $argv)
+    # if not isatty stdin
+    #     while read -l line; set -a prompt $line; end
+    #     set prompt (string join \n $prompt)
+    # else
+    #     set prompt (string join " " $argv)
+    # end
 
     test -n "$prompt"; or begin; echo "Usage: ai [-m/--model MODEL] [-s/--system SYSTEM] [-h/--history] <prompt>"; return 1; end
 
