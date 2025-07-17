@@ -51,7 +51,7 @@ if test -d "$__fish_config_dir/extra"
   end
 end
 
-alias aigc 'git commit -m (ai -n "Generate a git semantic commit message from the following diff: $(git diff --cached HEAD | string escape)")'
+alias aigc 'git commit -m (ai --model=claude-3-5-haiku-20241022 -n "Generate a git semantic commit message from the following diff: $(git diff --cached HEAD | string escape)")'
 
 
 # fzf for selecting branches when we have a lot of branches
