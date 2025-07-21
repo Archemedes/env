@@ -3,11 +3,11 @@ set -gx ANTHROPIC_API_KEY (pass api/anthropic)
 
 set -g _ai_system_prompt (cat $__fish_config_dir/functions/system_prompt)
 
-complete -c ai -s m -l model -xa "claude-3-5-haiku-20241022 claude-4-0-sonnet-20250514 claude-opus-4-20250514"
+complete -c ai -s m -l model -xa "claude-3-5-haiku-20241022 claude-sonnet-4-20250514 claude-opus-4-20250514"
 complete -c ai -s h -l history -xa "(complete -C'kitty @ get-text --extent=' | sed 's/--extent=//')"
 
 function ai --description "Send a prompt to Claude"
-    argparse 'm/model=' 's/system=' 'c/chat' 'n/nochat' 'h/history=?' -- $argv; or return
+    argparse 'd/debug' 'm/model=' 's/system=' 'c/chat' 'n/nochat' 'h/history=?' -- $argv; or return
     set -q _flag_model; or set _flag_model claude-4-sonnet-20250514
     set -q _flag_system; or set _flag_system $_ai_system_prompt
 
@@ -36,15 +36,18 @@ function ai --description "Send a prompt to Claude"
     set jq_args --arg model "$_flag_model" --arg system "$_flag_system" --argjson history $history_json
     set jq_filter '{"model":$model,"max_tokens":4096,"system":$system,"messages":($history + [{"role":"user","content":.}])}'
 
-    set response (echo $prompt | jq -Rs $jq_args $jq_filter \
+    set raw_response (echo $prompt | jq -Rs $jq_args $jq_filter \
         | curl -s https://api.anthropic.com/v1/messages \
-        -H "x-api-key: $ANTHROPIC_API_KEY" -H "anthropic-version: 2023-06-01" -H "content-type: application/json" \
-        -d @- | jq -r '.content[0].text')
+        -H "x-api-key: $ANTHROPIC_API_KEY" -H "anthropic-version: 2023-06-01" -H "content-type: application/json" -d @-)
+    set response (echo $raw_response | jq -r '.content[0].text')
 
     if not set -q _flag_nochat
         set new_exchange (printf '{"role":"user","content":%s},{"role":"assistant","content":%s}' (echo $prompt | jq -Rs .) (echo $response | jq -Rs .))
         set -U _ai_history (test -n "$_ai_history"; and echo "$_ai_history,$new_exchange"; or echo $new_exchange)
     end
 
+    if not set -q response; or test "$response" = null; or set -q _flag_debug
+        echo $raw_response | jq
+    end
     printf '%s\n' $response
 end
