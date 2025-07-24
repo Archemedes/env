@@ -26,7 +26,6 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias cd.="cd (readlink -f .)" #Switch symlink
 
-alias icat="kitty +kitten icat"
 
 function aka --argument-names new current
   alias $new=$current
@@ -38,11 +37,13 @@ aka g git
 aka k kubectl
 aka py python
 
-set -gx TERM xterm-kitty
 set -gx EDITOR nvim
 set -gx EXA_STANDARD_OPTIONS --long --all --icons
 set -gx fish_user_paths "$HOME/.local/bin"
 
+
+source "$__fish_config_dir/kitty.fish"
+source "$__fish_config_dir/ai.fish"
 
 # Keeping project-specific setup I don't actually want in my dotfiles repo
 if test -d "$__fish_config_dir/extra"
@@ -50,8 +51,6 @@ if test -d "$__fish_config_dir/extra"
     source $f
   end
 end
-
-alias aigc 'git commit -m (ai --model=claude-3-5-haiku-20241022 -n "Generate a git semantic commit message from the following diff: $(git diff --cached HEAD | string escape)")'
 
 
 # fzf for selecting branches when we have a lot of branches
