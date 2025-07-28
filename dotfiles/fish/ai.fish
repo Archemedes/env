@@ -3,7 +3,8 @@ alias aigc 'git commit -m (ai --model=claude-3-5-haiku-latest -n "Generate a git
 function airun
   set _input (commandline | string trim)
   if test -n "$_input"
-    commandline -r "ai -n (string escape $_input)"
+    set _input (echo $_input | string escape)
+    commandline -r "ai -n $_input"
     commandline -f execute
   end
 end
