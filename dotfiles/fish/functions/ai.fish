@@ -32,7 +32,11 @@ function ai --description "Send a prompt to Claude"
     end
 
     set -q _flag_chat || set -q _flag_nochat || set -U _ai_history
-    set history_json "[$_ai_history]"
+    if set -q _flag_nochat
+        set history_json "[]"
+    else 
+        set history_json "[$_ai_history]"
+    end
     set jq_args --arg model "$_flag_model" --arg system "$_flag_system" --argjson history $history_json
     set jq_filter '{"model":$model,"max_tokens":4096,"system":$system,"messages":($history + [{"role":"user","content":.}])}'
 
