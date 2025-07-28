@@ -17,7 +17,8 @@ end
 
 function aicomplete
   set _input (commandline | string trim | string escape)
-  set _output (ai -n --history --model=claude-3-5-haiku-latest "You are a terminal completion agent for a user using fish shell and kitty terminal. Your output should ONLY be a complete and valid terminal command, with no additional explanation, because the output will be substituted on the commandline of the active terminal window as input. Make sure your output is always a FULL shell command, not just the completion. Furthermore, input from the user might be a mix of a partial terminal command and plain human-readable explaining the user's intention. With these instructions in mind, return the most likely completion for the following partial input, which was already written by the user: $_input")
+  set _system_prompt (cat $__fish_config_dir/prompts/shell_completion)
+  set _output (ai -n --history --model=claude-3-5-haiku-latest --system $_system_prompt "Return the most likely completion for the following partial input, which was already written by the user: $_input")
 
   commandline -r (echo $_output | string trim)
 end

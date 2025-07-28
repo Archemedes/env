@@ -1,7 +1,7 @@
 set -gx OPENAI_API_KEY (pass api/openai)
 set -gx ANTHROPIC_API_KEY (pass api/anthropic)
 
-set -g _ai_system_prompt (cat $__fish_config_dir/functions/system_prompt)
+set -g _ai_system_prompt (cat $__fish_config_dir/prompts/system_prompt)
 
 complete -c ai -s m -l model -xa "claude-3-5-haiku-latest claude-sonnet-4-0 claude-opus-4-0"
 complete -c ai -s h -l history -xa "(complete -C'kitty @ get-text --extent=' | sed 's/--extent=//')"
