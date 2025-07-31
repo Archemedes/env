@@ -11,3 +11,4 @@
     prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -D
     up = !git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\"
     gud = rebase -i master
+    lint = !ruff check --fix; ruff format; git add -u; git commit -m "chore: ran automated linting fixes"
