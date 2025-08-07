@@ -7,9 +7,11 @@ complete -c ai -s m -l model -xa "claude-3-5-haiku-latest claude-sonnet-4-0 clau
 complete -c ai -s h -l history -xa "(complete -C'kitty @ get-text --extent=' | sed 's/--extent=//')"
 
 function ai --description "Send a prompt to Claude"
-    argparse 'd/debug' 'm/model=' 's/system=' 'c/chat' 'n/nochat' 'h/history=?' -- $argv; or return
+    argparse 'd/debug' 'm/model=' 's/system=' 'c/chat' 'n/nochat' \
+             'h/history=?' 'completion=' 'max-tokens=' -- $argv; or return
     set -q _flag_model; or set _flag_model claude-4-sonnet-20250514
     set -q _flag_system; or set _flag_system $_ai_system_prompt
+    set -q _flag_max_tokens; or set _flag_max_tokens 4096
 
     # Handle history flag: if -h is used without parameter, default to 'last_non_empty_output'
     if set -q _flag_history; and test -z "$_flag_history"
@@ -37,8 +39,13 @@ function ai --description "Send a prompt to Claude"
     else 
         set history_json "[$_ai_history]"
     end
-    set jq_args --arg model "$_flag_model" --arg system "$_flag_system" --argjson history $history_json
-    set jq_filter '{"model":$model,"max_tokens":4096,"system":$system,"messages":($history + [{"role":"user","content":.}])}'
+    set jq_args --arg model "$_flag_model" --arg system "$_flag_system" --arg max_tokens "$_flag_max_tokens" --argjson history $history_json
+    if set -q _flag_completion
+        set jq_args $jq_args --arg completion "$_flag_completion"
+        set jq_filter '{"model":$model,"max_tokens":($max_tokens|tonumber),"system":$system,"messages":($history + [{"role":"user","content":.},{"role":"assistant","content":$completion}])}'
+    else
+        set jq_filter '{"model":$model,"max_tokens":($max_tokens|tonumber),"system":$system,"messages":($history + [{"role":"user","content":.}])}'
+    end
 
     set raw_response (echo $prompt | jq -Rs $jq_args $jq_filter \
         | curl -s https://api.anthropic.com/v1/messages \
