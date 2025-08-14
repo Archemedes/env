@@ -12,7 +12,7 @@ abbr -a glog git log --no-decorate --oneline
 abbr -a gp git pull
 abbr -a yt ytfzf -md
 abbr -a venv source .venv/bin/activate.fish
-abbr -a psh poetry shell
+abbr -a penv "source (poetry env info --path)/bin/activate.fish"
 abbr -a pr poetry run
 abbr -a ji jira
 
