@@ -24,5 +24,5 @@ function aicomplete
 end
 
 
-bind \e airun
+bind \ea airun
 bind -k btab aicomplete
