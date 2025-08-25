@@ -5,10 +5,11 @@ set -g _ai_system_prompt (cat $__fish_config_dir/prompts/system_prompt)
 
 complete -c ai -s m -l model -xa "claude-3-5-haiku-latest claude-sonnet-4-0 claude-opus-4-0"
 complete -c ai -s h -l history -xa "(complete -C'kitty @ get-text --extent=' | sed 's/--extent=//')"
+complete -c ai -s H -l allhistory -d "Include all terminal history as context"
 
 function ai --description "Send a prompt to Claude"
     argparse 'd/debug' 'm/model=' 's/system=' 'c/chat' 'n/nochat' \
-             'h/history=?' 'completion=' 'max-tokens=' -- $argv; or return
+             'h/history=?' 'H/allhistory' 'completion=' 'max-tokens=' -- $argv; or return
     set -q _flag_model; or set _flag_model claude-4-sonnet-20250514
     set -q _flag_system; or set _flag_system $_ai_system_prompt
     set -q _flag_max_tokens; or set _flag_max_tokens 4096
@@ -16,6 +17,11 @@ function ai --description "Send a prompt to Claude"
     # Handle history flag: if -h is used without parameter, default to 'last_non_empty_output'
     if set -q _flag_history; and test -z "$_flag_history"
         set _flag_history last_non_empty_output
+    end
+ 
+    # Handle full history flag: -H sets extent to 'all'
+    if set -q _flag_allhistory
+        set _flag_history all
     end
 
     # Handle piped input as context
@@ -30,7 +36,7 @@ function ai --description "Send a prompt to Claude"
         set prompt (string join " " $argv)
     end
 
-    test -n "$prompt"; or begin; echo "Usage: ai [-m/--model MODEL] [-s/--system SYSTEM] [-h/--history] <prompt>"; return 1; end
+    test -n "$prompt"; or begin; echo "Usage: ai [-m/--model MODEL] [-s/--system SYSTEM] [-h/--history] [-H/--fullhistory] <prompt>"; return 1; end
 
     if set -q _flag_history
         set shell_history (kitty @ get-text --extent=$_flag_history)
