@@ -24,7 +24,7 @@ function ai --description "Send a prompt to Claude"
         while read -l line
             set -a piped_input $line
         end
-        set piped_context (string join \n $piped_input)
+        set piped_context (string join \n -- $piped_input)
         set prompt (string join " " $argv)"\n\nHere is some context from piped input:\n\n"$piped_context
     else
         set prompt (string join " " $argv)
