@@ -1,5 +1,5 @@
-set -gx OPENAI_API_KEY (pass api/openai)
-set -gx ANTHROPIC_API_KEY (pass api/anthropic)
+set -gx OPENAI_API_KEY (passage api/openai)
+set -gx ANTHROPIC_API_KEY (passage api/anthropic)
 
 set -g _ai_system_prompt (cat $__fish_config_dir/prompts/system_prompt)
 
@@ -18,13 +18,17 @@ function ai --description "Send a prompt to Claude"
         set _flag_history last_non_empty_output
     end
 
-    set prompt (string join " " $argv)
-    # if not isatty stdin
-    #     while read -l line; set -a prompt $line; end
-    #     set prompt (string join \n $prompt)
-    # else
-    #     set prompt (string join " " $argv)
-    # end
+    # Handle piped input as context
+    if not isatty stdin
+        set piped_input
+        while read -l line
+            set -a piped_input $line
+        end
+        set piped_context (string join \n $piped_input)
+        set prompt (string join " " $argv)"\n\nHere is some context from piped input:\n\n"$piped_context
+    else
+        set prompt (string join " " $argv)
+    end
 
     test -n "$prompt"; or begin; echo "Usage: ai [-m/--model MODEL] [-s/--system SYSTEM] [-h/--history] <prompt>"; return 1; end
 
