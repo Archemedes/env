@@ -1,4 +1,3 @@
-set -gx OPENAI_API_KEY (passage api/openai)
 set -gx ANTHROPIC_API_KEY (passage api/anthropic)
 
 set -g _ai_system_prompt (cat $__fish_config_dir/prompts/system_prompt)
