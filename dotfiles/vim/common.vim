@@ -48,6 +48,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+nnoremap <C-c> <C-w>c
 
 " Also for temrinal window
 tnoremap <C-h> <C-\><C-n><C-w>h
