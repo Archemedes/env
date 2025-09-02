@@ -1,16 +1,16 @@
 set -gx ANTHROPIC_API_KEY (passage api/anthropic)
 
-set -g _ai_system_prompt (cat $__fish_config_dir/prompts/system_prompt)
-
 complete -c ai -s m -l model -xa "claude-3-5-haiku-latest claude-sonnet-4-0 claude-opus-4-1"
 complete -c ai -s h -l history -xa "(complete -C'kitty @ get-text --extent=' | sed 's/--extent=//')"
 complete -c ai -s H -l allhistory -d "Include all terminal history as context"
+complete -c ai -s s -l system -xa "(ls $__fish_config_dir/prompts/ 2>/dev/null)"
 
 function ai --description "Send a prompt to Claude"
     argparse 'd/debug' 'm/model=' 's/system=' 'c/chat' 'n/nochat' \
              'h/history=?' 'H/allhistory' 'completion=' 'max-tokens=' 'p/print-history' -- $argv; or return
     set -q _flag_model; or set _flag_model claude-4-sonnet-20250514
-    set -q _flag_system; or set _flag_system $_ai_system_prompt
+    set -q _flag_system; or set _flag_system system_prompt
+    set _flag_system (cat $__fish_config_dir/prompts/$_flag_system)
     set -q _flag_max_tokens; or set _flag_max_tokens 4096
 
     if set -q _flag_print_history
