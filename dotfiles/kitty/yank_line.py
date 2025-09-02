@@ -32,4 +32,4 @@ def handle_result(args, data, target_window_id, boss, extra_cli_args, *a):
         # will open the provided url in the system browser
         import os
         line = line.strip()
-        os.system(f'echo -n {line} | xclip -sel c')
+        os.system(f'echo -n {line} | kitten clipboard')
