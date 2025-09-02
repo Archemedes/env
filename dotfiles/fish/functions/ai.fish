@@ -2,16 +2,21 @@ set -gx ANTHROPIC_API_KEY (passage api/anthropic)
 
 set -g _ai_system_prompt (cat $__fish_config_dir/prompts/system_prompt)
 
-complete -c ai -s m -l model -xa "claude-3-5-haiku-latest claude-sonnet-4-0 claude-opus-4-0"
+complete -c ai -s m -l model -xa "claude-3-5-haiku-latest claude-sonnet-4-0 claude-opus-4-1"
 complete -c ai -s h -l history -xa "(complete -C'kitty @ get-text --extent=' | sed 's/--extent=//')"
 complete -c ai -s H -l allhistory -d "Include all terminal history as context"
 
 function ai --description "Send a prompt to Claude"
     argparse 'd/debug' 'm/model=' 's/system=' 'c/chat' 'n/nochat' \
-             'h/history=?' 'H/allhistory' 'completion=' 'max-tokens=' -- $argv; or return
+             'h/history=?' 'H/allhistory' 'completion=' 'max-tokens=' 'p/print-history' -- $argv; or return
     set -q _flag_model; or set _flag_model claude-4-sonnet-20250514
     set -q _flag_system; or set _flag_system $_ai_system_prompt
     set -q _flag_max_tokens; or set _flag_max_tokens 4096
+
+    if set -q _flag_print_history
+        _ai_print_history
+        return
+    end
 
     # Handle history flag: if -h is used without parameter, default to 'last_non_empty_output'
     if set -q _flag_history; and test -z "$_flag_history"
@@ -64,4 +69,21 @@ function ai --description "Send a prompt to Claude"
         echo $raw_response | jq
     end
     printf '%s\n' $response
+end
+
+function _ai_print_history
+    if test -n "$_ai_history"
+        echo "[$_ai_history]" | jq -r '.[] | "\(.role)|\(.content)"' | while read -d '|' role content
+            if test "$role" = "user"
+                set_color green
+                echo -n "❯ "
+                echo $content
+            else
+                set_color blue
+                echo $content
+            end
+        end
+    else
+        echo "No conversation history."
+    end
 end
