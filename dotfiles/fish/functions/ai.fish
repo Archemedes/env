@@ -4,6 +4,12 @@ complete -c ai -s m -l model -xa "claude-3-5-haiku-latest claude-sonnet-4-0 clau
 complete -c ai -s h -l history -xa "(complete -C'kitty @ get-text --extent=' | sed 's/--extent=//')"
 complete -c ai -s H -l allhistory -d "Include all terminal history as context"
 complete -c ai -s s -l system -xa "(ls $__fish_config_dir/prompts/ 2>/dev/null)"
+complete -c ai -s d -l debug -d "Show raw API response for debugging"
+complete -c ai -s c -l chat -d "Continue the conversation from the previous message"
+complete -c ai -s n -l nochat -d "Message will not start a new conversation"
+complete -c ai -s p -l print-history -d "Display current conversation history and exit"
+complete -c ai -l completion -d "Prefill assistant response with specified text"
+complete -c ai -l max-tokens -d "Maximum tokens in response (default: 4096)"
 
 function ai --description "Send a prompt to Claude"
     argparse 'd/debug' 'm/model=' 's/system=' 'c/chat' 'n/nochat' \
