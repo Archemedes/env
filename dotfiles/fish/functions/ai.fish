@@ -1,5 +1,3 @@
-set -gx ANTHROPIC_API_KEY (passage api/anthropic)
-
 complete -c ai -s m -l model -xa "claude-3-5-haiku-latest claude-sonnet-4-0 claude-opus-4-1"
 complete -c ai -s h -l history -xa "(complete -C'kitty @ get-text --extent=' | sed 's/--extent=//')"
 complete -c ai -s H -l allhistory -d "Include all terminal history as context"
@@ -63,7 +61,7 @@ function ai --description "Send a prompt to Claude"
 
     set raw_response (echo $prompt | jq -Rs $jq_args $jq_filter \
         | curl -s https://api.anthropic.com/v1/messages \
-        -H "x-api-key: $ANTHROPIC_API_KEY" -H "anthropic-version: 2023-06-01" -H "content-type: application/json" -d @-)
+        -H "x-api-key: $(passage api/anthropic)" -H "anthropic-version: 2023-06-01" -H "content-type: application/json" -d @-)
     set response (echo $raw_response | jq -r '.content[0].text')
 
     if not set -q _flag_nochat
