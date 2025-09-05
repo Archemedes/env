@@ -65,7 +65,7 @@ function ai --description "Send a prompt to Claude"
     set response (echo $raw_response | jq -r '.content[0].text')
 
     if not set -q _flag_nochat
-        set new_exchange (printf '{"role":"user","content":%s},{"role":"assistant","content":%s}' (echo $prompt | jq -Rs .) (echo $response | jq -Rs .))
+        set new_exchange (printf '{"role":"user","content":%s},{"role":"assistant","content":%s}' (echo $prompt | jq -Rs .) (echo $raw_response | jq -r '.content[0].text' | jq -Rs .))
         set -U _ai_history (test -n "$_ai_history"; and echo "$_ai_history,$new_exchange"; or echo $new_exchange)
     end
 
@@ -77,15 +77,15 @@ end
 
 function _ai_print_history
     if test -n "$_ai_history"
-        echo "[$_ai_history]" | jq -r '.[] | "\(.role)|\(.content)"' | while read -d '|' role content
+        echo "[$_ai_history]" | jq -c '.[]' | while read -l entry
+            set role (echo $entry | jq -r '.role')
             if test "$role" = "user"
                 set_color green
                 echo -n "❯ "
-                echo $content
             else
                 set_color blue
-                echo $content
             end
+            echo $entry | jq -r '.content'
         end
     else
         echo "No conversation history."
