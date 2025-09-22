@@ -1,4 +1,3 @@
-complete -c ai -s m -l model -xa "anthropic/claude-3.5-haiku anthropic/claude-opus-4.1 anthropic/claude-sonnet-4 x-ai/grok-4 x-ai/grok-code-fast-1 google/gemini-2.5-flash google/gemini-2.5-pro z-ai/glm-4.5 openai/codex-mini switchpoint/router"
 complete -c ai -s h -l history -xa "(complete -C'kitty @ get-text --extent=' | sed 's/--extent=//')"
 complete -c ai -s H -l allhistory -d "Include all terminal history as context"
 complete -c ai -s s -l system -xa "(ls $__fish_config_dir/prompts/ 2>/dev/null)"
@@ -9,12 +8,29 @@ complete -c ai -s p -l print-history -d "Display current conversation history an
 complete -c ai -l completion -d "Prefill assistant response with specified text"
 complete -c ai -l max-tokens -d "Maximum tokens in response (default: 4096)"
 
+complete -c ai -s m -l model -xa "
+anthropic/claude-3.5-haiku
+anthropic/claude-opus-4.1
+anthropic/claude-sonnet-4
+x-ai/grok-4-fast:free
+x-ai/grok-code-fast-1
+google/gemini-2.5-flash
+google/gemini-2.5-pro
+z-ai/glm-4.5
+openai/codex-mini
+switchpoint/router"
+
+
 function ai --description "Send a prompt to Claude"
     argparse 'd/debug' 'm/model=' 's/system=' 'c/chat' 'n/nochat' \
              'h/history=?' 'H/allhistory' 'completion=' 'max-tokens=' 'p/print-history' -- $argv; or return
-    set -q _flag_model; or set _flag_model anthropic/claude-sonnet-4
+
+    set -l _default_model x-ai/grok-4-fast:free
+    set -q _flag_model; or set _flag_model $_default_model
+
     set -q _flag_system; or set _flag_system system_prompt
     set _flag_system (cat $__fish_config_dir/prompts/$_flag_system)
+
     set -q _flag_max_tokens; or set _flag_max_tokens 4096
 
     if set -q _flag_print_history
@@ -68,7 +84,7 @@ function ai --description "Send a prompt to Claude"
 
     if not set -q _flag_nochat
         set new_exchange (printf '{"role":"user","content":%s},{"role":"assistant","content":%s}' (echo $prompt | jq -Rs .) (echo $response | jq -Rs .))
-        set -U _ai_history (test -n "$_ai_history"; and echo "$_ai_history,$new_exchange"; or echo $new_exchange)
+        set -U _ai_history (test -n "$_ai_history"; and printf '%s,%s' "$_ai_history" "$new_exchange"; or printf '%s' "$new_exchange")
     end
 
     if not set -q response; or test "$response" = null; or set -q _flag_debug
@@ -87,7 +103,7 @@ function _ai_print_history
             else
                 set_color blue
             end
-            echo $entry | jq -r '.content'
+            printf '%s\n' (echo $entry | jq -r '.content')
         end
     else
         echo "No conversation history."
