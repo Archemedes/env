@@ -8,17 +8,7 @@ complete -c ai -s p -l print-history -d "Display current conversation history an
 complete -c ai -l completion -d "Prefill assistant response with specified text"
 complete -c ai -l max-tokens -d "Maximum tokens in response (default: 4096)"
 
-complete -c ai -s m -l model -xa "
-anthropic/claude-3.5-haiku
-anthropic/claude-opus-4.1
-anthropic/claude-sonnet-4
-x-ai/grok-4-fast:free
-x-ai/grok-code-fast-1
-google/gemini-2.5-flash
-google/gemini-2.5-pro
-z-ai/glm-4.5
-openai/codex-mini
-switchpoint/router"
+complete -c ai -s m -l model -xa "(cat models)"
 
 
 function ai --description "Send a prompt to Claude"
