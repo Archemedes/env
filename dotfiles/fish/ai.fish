@@ -22,6 +22,5 @@ function aicomplete
   commandline -r (echo $_output | string trim)
 end
 
-
 bind \ea airun
-bind -k btab aicomplete
+bind ctrl-tab aicomplete
