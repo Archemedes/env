@@ -8,7 +8,7 @@ complete -c ai -s p -l print-history -d "Display current conversation history an
 complete -c ai -l completion -d "Prefill assistant response with specified text"
 complete -c ai -l max-tokens -d "Maximum tokens in response (default: 4096)"
 
-complete -c ai -s m -l model -xa "(cat models)"
+complete -c ai -s m -l model -xa "(cat $__fish_config_dir/models)"
 
 
 function ai --description "Send a prompt to Claude"
