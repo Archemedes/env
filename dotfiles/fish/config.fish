@@ -17,6 +17,8 @@ abbr -a venv source .venv/bin/activate.fish
 abbr -a penv "source (poetry env info --path)/bin/activate.fish"
 abbr -a pr poetry run
 abbr -a ji jira
+abbr -a lzd lazydocker
+abbr -a lzg lazygit
 
 abbr -a awsaccounts 'aws organizations list-accounts --query "Accounts[*].[Name,Id]" --output table'
 abbr -a awsinstances 'aws ec2 describe-instances --profile customer-zero --query "Reservations[*].Instances[0].[InstanceId,State.Name]"'
