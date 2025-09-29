@@ -71,7 +71,7 @@ function ai --description "Send a prompt to Claude"
     set raw_response (echo $prompt | jq -Rs $jq_args $jq_filter \
         | curl -s https://openrouter.ai/api/v1/chat/completions \
         -H "Content-Type: application/json" -H "Authorization: Bearer $(passage api/openrouter)"  -d @-)
-    set response (echo -n $_flag_completion) (echo -n $raw_response | jq -r '.choices[0].message.content')
+    set response "$(echo -n $_flag_completion)$(echo -n $raw_response | jq -r '.choices[0].message.content')"
 
     if not set -q _flag_nochat
         set new_exchange (printf '{"role":"user","content":%s},{"role":"assistant","content":%s}' (echo $prompt | jq -Rs .) (echo $response | jq -Rs .))
