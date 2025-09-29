@@ -38,6 +38,17 @@ function ai --description "Send a prompt to Claude"
         set _flag_history all
     end
 
+    # Handle special prefixes for chat/nochat flags
+    if test (count $argv) -gt 0
+        if string match -q ">*" $argv[1]
+            set _flag_chat 1
+            set argv[1] (string sub -s 2 $argv[1])  # Remove first character
+        else if string match -q "#*" $argv[1]
+            set _flag_nochat 1
+            set argv[1] (string sub -s 2 $argv[1])  # Remove first character
+        end
+    end
+
     set prompt (string join " " $argv)
     if not isatty stdin
         set piped_input; while read -l line; set -a piped_input $line; end

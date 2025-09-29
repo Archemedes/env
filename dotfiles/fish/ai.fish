@@ -1,3 +1,6 @@
+# This makes ai commands not show up in history, which I think is correct
+abbr ai " ai"
+
 alias aigc 'git commit -m (ai --model=anthropic/claude-3-5-haiku-latest -n "Generate a git semantic commit message from the following diff: $(git diff --cached HEAD | string escape)")'
 
 function airun
