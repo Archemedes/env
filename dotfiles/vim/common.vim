@@ -154,10 +154,8 @@ augroup pythonconfig
 augroup END
 
 function! FormatPython()
-    silent exec "!isort -q %"
-    " silent exec "!black %"
-    silent exec "!autopep8 --in-place --ignore=E731 %"
-    silent exec "!autoflake8 --in-place %"
+    silent exec "!ruff check --fix %"
+    silent exec "!ruff format %"
     redraw!
     e!
 endfunction
