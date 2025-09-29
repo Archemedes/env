@@ -254,22 +254,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
-augroup END
-
-augroup trailing_whitespace
-    autocmd!
-    autocmd FileType python,json autocmd BufWritePre <buffer> %s/\s\+$//e
-    autocmd FileType python autocmd BufWritePre <buffer> silent! %s#\($\n\s*\)\+\%$##
-augroup ENDC
-
-augroup pythonconfig
-    autocmd FileType python let b:coc_root_patterns = ['pyrightconfig.json']
-    autocmd FileType python setlocal colorcolumn=120
-augroup END
 
 function! CreateTerminalInstance()
     execute "vertical terminal"
