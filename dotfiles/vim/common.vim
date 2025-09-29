@@ -149,6 +149,9 @@ augroup trailing_whitespace
 augroup ENDC
 
 augroup pythonconfig
+    au!
+    au FileType python inoremap - _
+    autocmd FileType python inoremap _ -
     autocmd FileType python let b:coc_root_patterns = ['pyrightconfig.json']
     autocmd FileType python setlocal colorcolumn=120
 augroup END
