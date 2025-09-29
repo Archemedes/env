@@ -12,8 +12,17 @@ function airun
     set first_word (string split " " "$_input")[1]
     command -q "$first_word" && return
 
+    # Handle special prefixes for chat/nochat flags
+    if string match -q ">*" $_input
+        set _flag "--chat"
+        set _input (string sub -s 2 $_input)  # Remove first character
+    else if string match -q "#*" $_input
+        set _flag "--nochat"
+        set _input (string sub -s 2 $_input)  # Remove first character
+    end
+
     set _input (echo $_input | string escape)
-    commandline -r " ai $_input"
+    commandline -r " ai $_flag $_input"
     commandline -f execute
   end
 end
