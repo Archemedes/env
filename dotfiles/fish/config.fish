@@ -6,7 +6,7 @@ function fish_greeting
 end
 
 abbr -a gs git status
-abbr -a gcm git commit -m 
+abbr -a gcm --set-cursor 'git commit -m "%"'
 abbr -a jl jupyter-lab
 abbr -a pip. pip install -e .
 abbr -a gco git checkout
@@ -19,6 +19,7 @@ abbr -a pr poetry run
 abbr -a ji jira
 abbr -a lzd lazydocker
 abbr -a lzg lazygit
+abbr -a u uv run
 
 abbr -a awsaccounts 'aws organizations list-accounts --query "Accounts[*].[Name,Id]" --output table'
 abbr -a awsinstances 'aws ec2 describe-instances --profile customer-zero --query "Reservations[*].Instances[0].[InstanceId,State.Name]"'
