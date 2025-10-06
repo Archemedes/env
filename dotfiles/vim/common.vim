@@ -75,6 +75,10 @@ nnoremap <silent> 0 :<C-U>call StartOfLine()<CR>
 " This is substitute-in-word. Pretty useful
 nnoremap S viwpyiw
 
+" Seems obvious enough spellcheck to be useful in all files
+iabbrev improt import
+
+
 " Turn off search highlighting
 nnoremap <leader>/ :nohl<CR>
 "Easily exit buffer
