@@ -32,6 +32,13 @@ alias .....="cd ../../../.."
 alias cd.="cd (readlink -f .)" #Switch symlink
 
 
+# ls commands
+if command -q eza
+  alias ls eza
+  alias lsdir "eza --only-dirs"
+  alias ll "eza --long --icons=auto --color=auto"
+end
+
 function aka --argument-names new current
   alias $new=$current
   complete -c $new -w $current
