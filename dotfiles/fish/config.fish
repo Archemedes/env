@@ -25,10 +25,6 @@ abbr -a awsaccounts 'aws organizations list-accounts --query "Accounts[*].[Name,
 abbr -a awsinstances 'aws ec2 describe-instances --profile customer-zero --query "Reservations[*].Instances[0].[InstanceId,State.Name]"'
 
 #cd commands
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
 alias cd.="cd (readlink -f .)" #Switch symlink
 
 
