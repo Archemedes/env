@@ -53,10 +53,6 @@ set -gx EDITOR nvim
 set -gx EXA_STANDARD_OPTIONS --long --all --icons
 set -gx fish_user_paths "$HOME/.local/bin"
 
-
-source "$__fish_config_dir/kitty.fish"
-source "$__fish_config_dir/ai.fish"
-
 # Keeping project-specific setup I don't actually want in my dotfiles repo
 if test -d "$__fish_config_dir/extra"
   for f in $__fish_config_dir/extra/*.fish
