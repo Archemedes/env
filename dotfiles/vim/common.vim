@@ -80,7 +80,7 @@ iabbrev improt import
 
 
 " Turn off search highlighting
-nnoremap <leader>/ :nohl<CR>
+nnoremap <leader>? :nohl<CR>
 "Easily exit buffer
 nnoremap <leader>q :bd<CR>
 "Exit all EXCEPT this one
