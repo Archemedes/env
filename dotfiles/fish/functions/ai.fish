@@ -42,7 +42,7 @@ function ai --description "Send a prompt to Claude"
     set prompt (string join " " $argv)
     if not isatty stdin
         set piped_input; while read -l line; set -a piped_input $line; end
-        set prompt "$prompt\n\nHere is some context from piped input:\n\n"(string join \n -- $piped_input)
+        set prompt (string join -- \n "$prompt\n" "Here is some context from piped input:\n\n" "$piped_input")
     end
 
     test -n "$prompt"; or begin; echo "Usage: ai [-m/--model MODEL] [-s/--system SYSTEM] [-h/--history] [-H/--fullhistory] <prompt>"; return 1; end
