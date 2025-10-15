@@ -9,8 +9,8 @@ function airun
 
     test (string length "$_input") -lt 10 && return 
 
-    set first_word (string split " " "$_input")[1]
-    command -q "$first_word" && return
+    # set first_word (string split " " "$_input")[1]
+    # command -q "$first_word" && return
 
     # Handle special prefixes for chat/nochat flags
     if string match -q ">*" $_input
