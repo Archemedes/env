@@ -66,11 +66,16 @@ function ai --description "Send a prompt to Claude"
     else
         set user_assistant_messages '[{"role":"user","content":.}]'
     end
-    set jq_filter '{"model":$model,"max_tokens":($max_tokens|tonumber),"messages":('$system_message' + $history + '$user_assistant_messages')}'
+    set jq_filter '{
+        "model":$model,
+        "max_tokens":($max_tokens|tonumber),
+        "messages":('$system_message' + $history + '$user_assistant_messages')
+    }'
 
-    set raw_response (echo $prompt | jq -Rs $jq_args $jq_filter \
-        | curl -s https://openrouter.ai/api/v1/chat/completions \
-        -H "Content-Type: application/json" -H "Authorization: Bearer $(passage api/openrouter)"  -d @-)
+    set raw_response (echo $prompt \
+        | jq -Rs $jq_args $jq_filter \
+        | curl -s https://openrouter.ai/api/v1/chat/completions -H "Content-Type: application/json" -H "Authorization: Bearer $(passage api/openrouter)"  -d @-
+    )
     set response "$(echo -n $_flag_completion)$(echo -n $raw_response | jq -r '.choices[0].message.content')"
 
     if not set -q _flag_nochat
