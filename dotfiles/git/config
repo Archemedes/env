@@ -13,3 +13,5 @@
     gud = rebase -i master
     lint = !ruff check --fix; ruff format; git add -u; git commit -m "chore: ran automated linting fixes"
     co = checkout
+[rerere]
+    enabled = true
