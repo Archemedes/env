@@ -77,6 +77,7 @@ nnoremap S viwpyiw
 
 " Seems obvious enough spellcheck to be useful in all files
 iabbrev improt import
+iabbrev retuen return
 
 
 " Turn off search highlighting
@@ -146,11 +147,11 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 augroup END
 
-augroup trailing_whitespace
-    autocmd!
-    autocmd FileType python,json autocmd BufWritePre <buffer> %s/\s\+$//e
-    autocmd FileType python autocmd BufWritePre <buffer> silent! %s#\($\n\s*\)\+\%$##
-augroup ENDC
+" augroup trailing_whitespace
+"     autocmd!
+"     autocmd FileType python,json autocmd BufWritePre <buffer> %s/\s\+$//e
+"     autocmd FileType python autocmd BufWritePre <buffer> silent! %s#\($\n\s*\)\+\%$##
+" augroup ENDC
 
 augroup pythonconfig
     autocmd FileType python let b:coc_root_patterns = ['pyrightconfig.json']
