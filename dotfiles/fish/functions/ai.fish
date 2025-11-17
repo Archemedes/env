@@ -15,7 +15,7 @@ function ai --description "Send a prompt to Claude"
     argparse 'd/debug' 'm/model=' 's/system=' 'c/chat' 'n/nochat' \
              'h/history=?' 'H/allhistory' 'completion=' 'max-tokens=' 'p/print-history' -- $argv; or return
 
-    set -l _default_model anthropic/claude-sonnet-4
+    set -l _default_model (head -1 $__fish_config_dir/models)
     set -q _flag_model; or set _flag_model $_default_model
 
     set -q _flag_system; or set _flag_system system_prompt
