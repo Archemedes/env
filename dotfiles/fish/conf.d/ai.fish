@@ -35,4 +35,4 @@ function aicomplete
 end
 
 bind \ea airun
-bind ctrl-tab aicomplete
+bind super-ctrl-shift-enter aicomplete
