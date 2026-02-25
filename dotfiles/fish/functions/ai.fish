@@ -12,8 +12,15 @@ complete -c ai -s m -l model -xa "(cat $__fish_config_dir/models)"
 
 
 function ai --description "Send a prompt to Claude"
-    argparse 'd/debug' 'm/model=' 's/system=' 'c/chat' 'n/nochat' \
+    argparse 'd/debug' 'm/model=?' 's/system=' 'c/chat' 'n/nochat' \
              'h/history=?' 'H/allhistory' 'completion=' 'max-tokens=' 'p/print-history' -- $argv; or return
+
+    if set -q _flag_model; and test -z "$_flag_model"
+        echo "Error: --model requires an argument." >&2
+        echo "Available models:" >&2
+        curl -s https://openrouter.ai/api/v1/models -H "Authorization: Bearer $(passage api/openrouter)" | jq -r '.data[].id' | sort
+        return 1
+    end
 
     set -l _default_model (head -1 $__fish_config_dir/models)
     set -q _flag_model; or set _flag_model $_default_model
