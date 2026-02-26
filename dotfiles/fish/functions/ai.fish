@@ -5,6 +5,7 @@ complete -c ai -s d -l debug -d "Show raw API response for debugging"
 complete -c ai -s c -l chat -d "Continue the conversation from the previous message"
 complete -c ai -s n -l nochat -d "Message will not start a new conversation"
 complete -c ai -s p -l print-history -d "Display current conversation history and exit"
+complete -c ai -l last-chat -d "Switch to previous conversation (swap current and previous chat)"
 complete -c ai -l completion -d "Prefill assistant response with specified text"
 complete -c ai -l max-tokens -d "Maximum tokens in response (default: 4096)"
 
@@ -13,7 +14,7 @@ complete -c ai -s m -l model -xa "(cat $__fish_config_dir/models)"
 
 function ai --description "Send a prompt to Claude"
     argparse 'd/debug' 'm/model=?' 's/system=' 'c/chat' 'n/nochat' \
-             'h/history=?' 'H/allhistory' 'completion=' 'max-tokens=' 'p/print-history' -- $argv; or return
+             'h/history=?' 'H/allhistory' 'completion=' 'max-tokens=' 'p/print-history' 'last-chat' -- $argv; or return
 
     if set -q _flag_model; and test -z "$_flag_model"
         echo "Error: --model requires an argument." >&2
@@ -33,6 +34,16 @@ function ai --description "Send a prompt to Claude"
     if set -q _flag_print_history
         _ai_print_history
         return
+    end
+
+    if set -q _flag_last_chat
+        set -l _tmp "$_ai_history"
+        set -U _ai_history "$_ai_history_prev"
+        set -U _ai_history_prev "$_tmp"
+        if test (count $argv) -eq 0; and isatty stdin
+            echo "Switched to previous conversation."
+            return
+        end
     end
 
     # Handle history flag: if -h is used without parameter, default to 'last_non_empty_output'
@@ -59,7 +70,10 @@ function ai --description "Send a prompt to Claude"
         set prompt "$prompt\n\nFor context, this is the recent output of the terminal session:\n$shell_history"
     end
 
-    set -q _flag_chat || set -q _flag_nochat || set -U _ai_history
+    if not set -q _flag_chat; and not set -q _flag_nochat; and not set -q _flag_last_chat
+        set -U _ai_history_prev "$_ai_history"
+        set -U _ai_history
+    end
     if set -q _flag_nochat
         set history_json "[]"
     else 
